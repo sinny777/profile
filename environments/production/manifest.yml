@@ -1,0 +1,9 @@
+applications:
+- services:
+  - hukam-cloudant-dev
+  - hukam-iot-dev
+  - hukam-conversation-dev
+  name: hbuddy-dev
+  command: node .
+  path: .
+  memory: 512M

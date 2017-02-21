@@ -1,0 +1,119 @@
+
+<div id="top-bar" class="top-bar2" >
+
+		<div id="logo">
+	        <a href="/#!/" class="standard-logo" title="{{pageContent.siteName}}" >{{pageContent.siteName}}</a>
+	        <a href="/#!/" class="retina-logo" title="{{pageContent.siteName}}" >{{pageContent.siteName}}</a>
+	    </div>
+	    
+	    <div id="top-menus">
+	    
+	        <ul class="nav">
+
+	           <li>
+	           		<div style="float:right;margin-top:17px;margin-bottom:7px; ">
+					      <div data-addthis-toolbox data-url="http://hbuddy.hukam.in" id="hbuddy" 
+					            class="addthis_toolbox addthis_default_style addthis_16x16_style">
+					        <a class="addthis_button_facebook"></a>
+					        <a class="addthis_button_twitter"></a>
+					        <a class="addthis_button_linkedin"></a>
+					        <a class="addthis_button_google_plusone_share"></a>
+					        <!-- <a class="addthis_button_pinterest"></a> -->
+					      </div>
+				      </div> 
+	           </li>
+	           
+	           <li class="dropdown top-menu-em" data-ng-if="!currentUser.id">
+		          <a href="#" data-toggle="modal" data-target="#loginModal" ><b>Login</b></a>
+		       </li>
+		        <li class="dropdown" data-ng-if="currentUser.id">
+		          <a data-ng-if="currentUser.provider == 'hukam' && currentUser.role == 'admin'" href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><b>Admin</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+			            <li><a href="#!/admin/products"><i class="flaticon-device" ></i>&nbsp;Products</a></li>
+			            <li><a href="https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html" target="_blank"><i class="fa fa-database" ></i>&nbsp;CloudantDB</a></li>
+			            <li><a href="https://rqeofj.internetofthings.ibmcloud.com/dashboard/" target="_blank"><i class="fa fa-microchip" ></i>&nbsp;IoT Platform</a></li>
+			            <li><a href="https://console.cloud.google.com/storage/browser/hukam-cdn/?project=hukam-157906" target="_blank"><i class="fa fa-cloud-download" ></i>&nbsp;Google Cloud Storage</a></li>
+			            <li><a href="https://console.ng.bluemix.net/devops/toolchains/da57be0e-17a8-442a-9a17-5cff6bbf19c5" target="_blank"><i class="fa fa-code" ></i>&nbsp;DevOps</a></li>
+			            <li><a href="https://github.com/sinny777/hukam/tree/master/hbuddy" target="_blank"><i class="fa fa-github" ></i>&nbsp;GIT Repository</a></li>
+			            
+			            <li class="divider"></li>
+			            <li><a href="#" data-ng-click="logout()"><i class="fa fa-power-off" ></i>&nbsp; Logout</a></li>
+					</ul>
+				</li>
+		        <li class="dropdown" data-ng-if="currentUser.id">
+		          <a data-ng-if="currentUser.provider == 'hukam' && currentUser.profile" data-target="#" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.username}}</b> <span class="caret"></span></a>
+		          <a data-ng-if="currentUser.provider != 'hukam' && currentUser.profile" data-target="#"  href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.profile.name}}</b> <span class="caret"></span></a>
+		          <a data-ng-if="currentUser.username && !currentUser.profile" data-target="#"  href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><b>{{currentUser.username}}</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+			            <li><a href="#!/account"><i class="fa fa-cogs" ></i>&nbsp; Account Settings</a></li>
+						<li><a href="#!/places"><i class="fa fa-home" ></i>&nbsp; My Places</a></li>
+			            <li class="divider"></li>
+			            <li><a href="#" data-ng-click="logout()"><i class="fa fa-power-off" ></i>&nbsp; Logout</a></li>
+					</ul>
+				</li>	
+	          
+	        </ul>
+	  
+	    </div>
+	    
+        <div id="top-search" >
+	      <form id="top-search-form" data-ng-submit="searchFor(searchTerm)" class="navbar-search pull-left" >
+	        <input type="text" class="search-query span2" data-ng-model="searchTerm"  placeholder="Search Here ... " />
+	      </form>
+	    </div> 
+	    
+		    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+	           <div class="modal-dialog">
+	             <div class="modal-content">
+	               <div class="modal-header">
+	                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                 <h3 class="modal-title nobottompadding" id="myModalLabel">Authentication</h3>
+	               </div>
+	               <div class="modal-body">
+	               
+								<div class="col-md-12">
+									Login via
+									<div class="social-buttons">
+										<a href="/auth/twitter" class="col-md-4 btn btn-social btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
+										<a href="/auth/facebook" class="col-md-4 btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+										<a href="/auth/google" class="col-md-4 btn btn-social btn-google"><i class="fa fa-google"></i> Google</a>
+									</div>
+	                                
+	                                <div class="line"></div>
+	                                
+									 <form class="form" role="form" accept-charset="UTF-8" id="login-nav">
+											
+											<div class="input-group margin-bottom-md">
+											  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+											  <input class="form-control" type="text" data-ng-model="loginCredentials.email" placeholder="Email address / Username" >
+											</div>
+											<div class="input-group">
+											  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+											  <input class="form-control" type="password" data-ng-model="loginCredentials.password" placeholder="Password">
+											</div>
+											<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+											
+											<div class="form-group">
+												 <button type="submit" class="btn btn-primary btn-block" data-ng-click="login();">Sign in</button>
+											</div>
+											<div class="checkbox">
+												 <label>
+												 <input type="checkbox" data-ng-model="loginCredentials.rememberMe"> keep me logged-in
+												 </label>
+											</div>
+									 </form>
+								</div>
+								<div class="bottom text-center">
+									New here ? <a href="#" data-ng-link="register();"><b>Join Us</b></a>
+								</div>
+	                 
+	               </div>
+	               <div class="modal-footer notopmargin">
+	                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	               </div>
+	             </div><!-- /.modal-content -->
+	           </div><!-- /.modal-dialog -->
+	         </div><!-- /.modal -->
+		    
+		    
+</div>

@@ -1,0 +1,12 @@
+applications:
+- services:
+  - granslive-cloudantDB
+  - granslive-conversation
+  - granslive-iotplatform
+  - granslive-objectstorage
+  - granslive-stt
+  - granslive-tts
+  name: granslive-web
+  command: node .
+  path: .
+  memory: 512M
