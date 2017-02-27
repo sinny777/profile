@@ -16,9 +16,9 @@ module.exports.get = function() {
 		    "SERVICES_CONFIG":{
 		    	"IOT_CONFIG":{
 		    		"org": "o6oosq",
-				    "id": "a-o6oosq-9a4g8ir9qb",
-				    "authkey": "a-o6oosq-9a4g8ir9qb",
-				    "authtoken": "nennZR_hIm0t*58JvX",
+		    		"id": "a-o6oosq-gwvhfgityg",
+				    "authkey": "a-o6oosq-gwvhfgityg",
+				    "authtoken": "xwottObtqR@WHSe+q-",
 				    "type": "shared"
 		    	},
 				"cloudantNOSQLDB":{

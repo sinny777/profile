@@ -325,7 +325,7 @@ define(function () {
     	delete $scope.selectedPlace["placeAreas"];
     	
     	$rootScope.loadingScreen.show();
-    	$scope.selectedPlace = iotService.save($scope.selectedPlace,
+    	$scope.selectedPlace = iotService.savePlace($scope.selectedPlace,
 		  function(errResp, place) { 
     		$rootScope.loadingScreen.hide();
     		if(errResp){

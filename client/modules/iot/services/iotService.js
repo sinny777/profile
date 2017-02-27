@@ -2,7 +2,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function (CONFIG, $http, Place, PlaceArea, Board, Group) {
+  var factory = function (CONFIG, $http, Place, PlaceArea, Board, Group, Device) {
 
 	  var service = {};
 
@@ -118,6 +118,20 @@ define(['angular'], function (angular) {
 				  });
 	  };
 	  
+	  service.saveDevice = function(deviceObj, callback){
+		  console.log("In iotService.saveDevice: >>> ", boardObj);
+		  Device.upsert(deviceObj,
+				  function(device) { 
+					  if(callback){
+						  callback(null, device);
+					  }
+				  },
+				  function(errorResponse) { 
+					  console.log("ERROR in saveDevice: >>> ", errorResponse);
+					  callback(errorResponse, null);
+				  });
+	  };
+	  
 	  service.findGroups = function(findReq, callback) {
 		  console.log("In iotService.findGroups: >>> ", findReq);
 		  Group.find(findReq,
@@ -136,7 +150,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['CONFIG', '$http', 'Place', 'PlaceArea', 'Board', 'Group'];
+	factory.$inject = ['CONFIG', '$http', 'Place', 'PlaceArea', 'Board', 'Group', 'Device'];
 	return factory;
 });
 

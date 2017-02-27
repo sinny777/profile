@@ -18,15 +18,19 @@ module.exports = function(Device) {
 							  console.log("ERROR RESPONSE Body: >> ", body);
 							  var error = new Error();
 							  error.status = response.statusMessagee;
-							  error.message = body.message;
+							  if(body){
+								  error.message = body.message;
+							  }
 							  error.code = response.statusCode;
 							  next(error);
 						  }else{
-							  ctx.instance.clientId = body.clientId;
-							  ctx.instance.typeId = body.typeId;
-							  ctx.instance.status = body.status;
-							  ctx.instance.registration = body.registration;
-							  ctx.instance.refs = body.refs;
+							  if(body){
+								  ctx.instance.clientId = body.clientId;
+								  ctx.instance.typeId = body.typeId;
+								  ctx.instance.status = body.status;
+								  ctx.instance.registration = body.registration;
+								  ctx.instance.refs = body.refs;
+							  }							  
 							  console.log("REGISTER RESPONSE, CODE: >>> ", response.statusCode, ", BODY: ", ctx.instance );
 							  next();
 						  }
