@@ -44,7 +44,8 @@ define(function () {
 			   console.log("Logged In User: >>>> ", userObj);
 			   if($rootScope.currentUser && $rootScope.currentUser.profile){
 		      		  if($rootScope.currentUser.profile.email == 'sinny777@gmail.com' ||
-		      				  $rootScope.currentUser.profile.username == 'sinny777'){
+		      			 $rootScope.currentUser.profile.username == 'sinny777' ||
+		      			 $rootScope.currentUser.profile.email == 'contact@granslive.com'){
 		      			$rootScope.currentUser.role = 'admin';
 		      		  }else{
 		      			$rootScope.currentUser.role = 'guest';

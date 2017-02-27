@@ -1,11 +1,11 @@
 applications:
 - services:
   - granslive-cloudantDB
-  - granslive-conversation
-  - granslive-iotplatform
-  - granslive-objectstorage
-  - granslive-stt
-  - granslive-tts
+  - hukam-conversation
+  - hukam-iotplatform
+  - hukam-objectstorage
+  - hukam-stt
+  - hukam-tts
   name: granslive-web
   command: node .
   path: .
