@@ -105,7 +105,8 @@ define(function () {
     		
     		if($rootScope.currentUser && $rootScope.currentUser.profile){
 	      		  if($rootScope.currentUser.profile.email == 'sinny777@gmail.com' ||
-	      				  $rootScope.currentUser.profile.username == 'sinny777'){
+	      			 $rootScope.currentUser.profile.username == 'sinny777' ||
+			      	 $rootScope.currentUser.profile.email == 'contact@granslive.com'){
 	      			$rootScope.currentUser.role = 'admin';
 	      		  }else{
 	      			$rootScope.currentUser.role = 'guest';
@@ -230,7 +231,8 @@ define(function () {
   	        }
   	    });
   		
-  		if(!result && sharedService.currentUser.emailId == 'sinny777@gmail.com'){
+  		if(!result && sharedService.currentUser.emailId == 'sinny777@gmail.com' ||
+  				sharedService.currentUser.profile.email == 'contact@granslive.com'){
   			result = true;
   		}
   		
