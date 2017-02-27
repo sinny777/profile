@@ -20,6 +20,8 @@ define(function () {
 	  $scope.floors = ['Ground'];
 	  $scope.deviceTypes = [];
 	  
+	  //SWB-16724121711
+	  
 	  /*
 	  $scope.$watch(
               "selectedPlace",
@@ -152,8 +154,8 @@ define(function () {
       };
       
 	  $scope.showAddNewPlacePanel = function(){
-		  console.log('IN showAddNewPlacePanel: ');
-		  $scope.selectedPlace = {floor: 'Ground'};
+		  console.log('IN showAddNewPlacePanel: >> ', $scope.ownerId);
+		  $scope.selectedPlace = {floor: 'Ground', 'ownerId': $scope.ownerId };
 		  $scope.display = "savePlacePanel";
 	  };
 	  
@@ -177,6 +179,19 @@ define(function () {
 	  $scope.showDashboard = function(){
 		  console.log('IN showDashboard: ');
 		  $scope.selectedPlaceArea = {};
+		  $scope.fetchPlaceAreas();
+		  
+		  if(!$scope.selectedPlace || !$scope.selectedPlace.id){
+	    		return false;
+	      }
+		  
+		  if(!$scope.selectedPlace.gatewayId){
+			  console.log("\n\n<<<<<< PLEASE UPDATE GATEWAY UNIQUE ID >>>>>> \n\n");
+		  }else{
+			  $scope.fetchPlaceSensorsData();
+			  $scope.fetchConnectedBoards();
+		  }	
+		  
 		  $scope.display = "dashboard";
 	  };
 	  
@@ -262,17 +277,13 @@ define(function () {
     				  if($scope.places && $scope.places.length == 1){
 						  $scope.selectedPlace = $scope.places[0];
 						  console.log("RESP:>>> ", errResp, ", selectedPlace: ", $scope.selectedPlace);
-						  $scope.fetchPlaceAreas();
-						  $scope.fetchPlaceSensorsData();
-						  $scope.fetchConnectedBoards();
-						  $scope.display = "dashboard";
+						  $scope.showDashboard();
 					  }else{
 						  angular.forEach($scope.places, function(place) {
 	    					  console.log('PLACE FETCHED: >>>> ', place);
 	    					  if(place.isDefault){
 	    						  $scope.selectedPlace = place;
-	    						  $scope.display = "dashboard";
-	    						  $scope.fetchPlaceAreas();
+	    						  $scope.showDashboard();
 	    					  }
 	    					});
 					  }  				  
@@ -319,7 +330,9 @@ define(function () {
     };
     
     $scope.savePlace = function(){
-    	$scope.selectedPlace.ownerId = $rootScope.currentUser.userId;
+    	console.log("IN savePlace 1: >>> ", $scope.selectedPlace);
+    	$scope.selectedPlace.ownerId = $scope.ownerId;
+    	console.log("IN savePlace 2: >>> ", $scope.selectedPlace);
     	
     	var areas = $scope.selectedPlace.placeAreas;
     	delete $scope.selectedPlace["placeAreas"];
@@ -441,7 +454,7 @@ define(function () {
     };
     
     $scope.fetchConnectedBoards = function(){
-    	if(!$scope.selectedPlace || !$scope.selectedPlace.id){
+    	if(!$scope.selectedPlace || !$scope.selectedPlace.id || !$scope.selectedPlace.gatewayId){
     		return false;
     	}
     	var findReq = {

@@ -54,7 +54,13 @@
 		  <div class="panel-body">
 		  	<form class="form-horizontal" role="form" method="post" >
 		  		<div class="form-group" >
-			   	  <label for="name" class="col-lg-2 control-label">Floor:</label>
+			   	  <label for="name" class="col-lg-3 control-label">hBuddy Unique Identifier:</label>
+				  <div class="col-lg-4">
+				    	<input type="text" class="form-control" data-ng-model="selectedPlace.gatewayId">
+				  </div>
+			    </div>
+		  		<div class="form-group" >
+			   	  <label for="name" class="col-lg-3 control-label">Floor:</label>
 				  <div class="col-lg-2">
 				    	<select class="form-control" data-ng-model="selectedPlace.floor">
 				    		<option data-ng-repeat="option in floors" value="{{option}}">{{option}}</option>
@@ -62,13 +68,13 @@
 				  </div>
 			    </div>
 				<div class="form-group" >
-				    <label for="name" class="col-lg-2 control-label">Area Title:</label>
+				    <label for="name" class="col-lg-3 control-label">Area Title:</label>
 				    <div class="col-lg-4">
 				    	<input type="text" class="form-control" data-ng-model="selectedPlace.title">
 				    </div>
 				</div>
 				<div class="form-group">
-			   		<label for="name" class="col-lg-2 control-label">Description:</label>
+			   		<label for="name" class="col-lg-3 control-label">Description:</label>
 			   		<div class="col-lg-4">
 				    	<textarea class="form-control" data-ng-model="selectedPlace.description" ></textarea>
 				    </div>
@@ -182,6 +188,9 @@
 	</div>
 	
 	<div class="row" data-ng-if="display == 'dashboard'">
+	
+		<span data-ng-if="!selectedPlace.gatewayId"><h3>Please update your hBuddy Unique Identifier !</h3></span>
+	
 		<div class="card col-sm-3" data-ng-repeat="placeArea in selectedPlace.placeAreas">
 		  <div class="card-block" style="background-image: url('//storage.googleapis.com/hukam-cdn/public/images/specific/blurred2.jpg');" data-ng-if="showAddBoard != placeArea.id">
 		  	<span class="fa-stack">
