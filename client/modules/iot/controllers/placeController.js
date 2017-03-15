@@ -459,11 +459,14 @@ define(function () {
     	}
     	var findReq = {
 				filter:{
-    			  		 where: {"and": [{"gatewayId": $scope.selectedPlace.gatewayId},
-    			  		                {"status": "inactive"}
-    			  		 				]}
+    			  		 where: {"or": [{"owner.ownerId": $scope.ownerId},
+    			  		 		        {"and": [{"gatewayId": $scope.selectedPlace.gatewayId},
+    	    			  		                {"status": "inactive"}
+    	    			  		 				]}
+    			  		 		        ]    			  		 		
 								}
-						};
+						}
+    				  };
 		iotService.findBoards(findReq,
   			  function(errResp, boards) { 
 					if(errResp){

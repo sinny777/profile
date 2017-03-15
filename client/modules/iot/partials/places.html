@@ -211,7 +211,7 @@
 		    <p>{{placeArea.description}}</p>
 		  </div>
 		  
-		  <div class="card-block" data-ng-if="showAddBoard == placeArea.id">
+		  <div class="card-block" data-ng-if="showAddBoard == placeArea.id" style="padding: 1px;">
 				<ul class="nav nav-tabs nav-justified">
 					<li class="active"><a href="javascirpt:void(0);"
 						data-target="#addBoardTab" data-toggle="tab">Boards</a></li>
@@ -219,14 +219,14 @@
 						data-target="#addSensorsTab" data-toggle="tab">Sensors</a></li>
 				</ul>
 				<div class="tab-content">
-					<div class="row tab-pane fade in active" id="addBoardTab">
+					<div class="tab-pane fade in active" id="addBoardTab">
 						
-						<div class="row appliances-tab tab-pane fade in active" id="connectedSwitchBoards">
+						<div class="appliances-tab tab-pane fade in active" id="connectedSwitchBoards">
 					   		<ul class="list-group list-group-flush small-font">
 								<li class="list-group-item"
 									data-ng-repeat="connectedBoard in connectedBoards" data-ng-show="connectedBoard.type == 'SWITCH_BOARD'">
 									<span >&nbsp;<i class="{{connectedBoard.status}}"> {{connectedBoard.uniqueIdentifier}}</i> </span>
-									<div class="pull-right" >
+									<div >
 										<a style="text-decoration: none;" href="javascript:void(0);"
 											data-ng-click="activateBoardAtPlaceArea(connectedBoard);"
 											data-toggle="tooltip" data-placement="left" title="Activate">
