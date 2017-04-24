@@ -17,7 +17,7 @@ define(['angular'], function (angular) {
 			    "authkey": "a-o6oosq-gwvhfgityg",
 			    "authtoken": "xwottObtqR@WHSe+q-",
 			    "type": "shared",
-			    "gatewayType": "GransLiveGateway"
+			    "gatewayType": "HukamGateway"
 			}
 		});
     

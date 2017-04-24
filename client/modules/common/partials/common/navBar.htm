@@ -10,7 +10,7 @@
 			          <a href="#" data-toggle="modal" data-target="#loginModal" ><b>Login</b></a>
 			        </li>
 			        <li class="dropdown" data-ng-if="currentUser.id">
-			          <a data-ng-if="currentUser.provider == 'hukam' && currentUser.role == 'admin'" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><b>Admin</b> <span class="caret"></span></a>
+			          <a data-ng-if="currentUser.role == 'admin'" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><b>Admin</b> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 				            <li><a href="#!/admin/products"><i class="flaticon-device" ></i>&nbsp;Products</a></li>
 				            <li><a href="https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html" target="_blank"><i class="fa fa-database" ></i>&nbsp;CloudantDB</a></li>

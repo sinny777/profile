@@ -18,8 +18,8 @@
       "required": false
     },
     "sensors": {
-    	"type": "object",
-    	"required": false
+      "type": "object",
+      "required": false
     },
     "gatewayId": {
       "type": "string",
