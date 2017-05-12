@@ -2,7 +2,7 @@
 define(['angular'], function (angular) {
     "use strict";
 
-  var factory = function ($rootScope, $cookieStore, $http) {
+  var factory = function ($rootScope, $cookieStore) {
 	  
 	  var service = {};
 
@@ -772,7 +772,7 @@ define(['angular'], function (angular) {
 	
   }
 
-	factory.$inject = ['$rootScope', '$cookieStore', '$http'];
+	factory.$inject = ['$rootScope', '$cookieStore'];
 	return factory;
 });
 

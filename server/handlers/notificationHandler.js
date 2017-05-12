@@ -69,7 +69,7 @@ module.exports = function(app) {
 
 	methods.sendPushNotification = function(pushData, pushMsg, registrationIds) {
 		console.log('IN notificationHandler.sendPushNotification: >> ', pushMsg);
-		var apiKey = "AIzaSyD_dNyMIgJxxY82yjokjNPUdNCLVWQuzM8";
+		var apiKey = "AIzaSyD2OWzzT2025GajqJqk3bX8RopK90hddjE";
 		var service = new gcm.Sender(apiKey);
 		var message = new gcm.Message({
 			priority : "high",
@@ -83,7 +83,7 @@ module.exports = function(app) {
 		message.addData(pushData);
 
 		message.addNotification({
-			title : "GransLive Notification",
+			title : "hBuddy Notification",
 			icon : "ic_launcher",
 			body : pushMsg,
 			priority : 2,
