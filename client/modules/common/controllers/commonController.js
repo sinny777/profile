@@ -45,7 +45,7 @@ define(function () {
 			   if($rootScope.currentUser && $rootScope.currentUser.profile){
 		      		  if($rootScope.currentUser.profile.email == 'sinny777@gmail.com' ||
 		      			 $rootScope.currentUser.profile.username == 'sinny777' ||
-		      			 $rootScope.currentUser.profile.email == 'contact@granslive.com'){
+		      			 $rootScope.currentUser.profile.email == 'contact.hukam@gmail.com'){
 		      			$rootScope.currentUser.role = 'admin';
 		      		  }else{
 		      			$rootScope.currentUser.role = 'guest';
