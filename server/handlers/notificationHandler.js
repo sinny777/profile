@@ -69,6 +69,7 @@ module.exports = function(app) {
 
 	methods.sendPushNotification = function(pushData, pushMsg, registrationIds) {
 		console.log('IN notificationHandler.sendPushNotification: >> ', pushMsg);
+		console.log('IN notificationHandler.registrationIds: >> ', registrationIds);
 		var apiKey = "AIzaSyD2OWzzT2025GajqJqk3bX8RopK90hddjE";
 		var service = new gcm.Sender(apiKey);
 		var message = new gcm.Message({
