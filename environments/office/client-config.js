@@ -10,7 +10,7 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'OFFICE',
-			API_URL: '//granslive-web.mybluemix.net/api',
+			API_URL: '//hukam-web.mybluemix.net/api',
 			IOT_CONFIG:{
 				"org": "o6oosq",
 			    "id": "a-o6oosq-gwvhfgityg",
