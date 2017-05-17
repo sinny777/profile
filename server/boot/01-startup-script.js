@@ -176,7 +176,7 @@ module.exports = function(app) {
 	};
 	
 	function testPushNotification(){
-		var gcm = require('node-gcm');
+		var FCM = require('fcm-push');
 		var pushMsg = "Just for tesing Push Notification at " +new Date();
 		var pushData = {
 				boardId : "ABCXYZ",
@@ -186,38 +186,33 @@ module.exports = function(app) {
 				picture : "http://wallpapercave.com/wp/3Ma6LaY.jpg"
 			};
 		var registrationIds = [];
-		registrationIds.push("kCTgv2vUBa4:APA91bE4lyV0P_11s44ADQUpRncxULk5U0c7exv1J-20mTExEqqUYYOVk2YLe8cwSUyv5ntG2OXC61Ld4BfNkcFYA9IMJKQbKbm6AhllquT6GYt1T9aObxivavn6zLYANHXcF29A06-m");
+		var deviceToken = "eqt7fel6Ga4:APA91bGGUO4Acaag6wA_UtsDbal8rKhJzzNrV5NmW0Fr7MZHuGUeYgbIzYCFMKJaP2JXzODxW8Fii8tu06JAGYb6FAkBpcdVti3VZWvS01F0nqpefDguCUb5Bd42JnLnRnZbTMP3z2kL";
+		registrationIds.push(deviceToken);
 		
 		console.log('IN notificationHandler.sendPushNotification: >> ', pushMsg);
-		var apiKey = "AIzaSyD_dNyMIgJxxY82yjokjNPUdNCLVWQuzM8";
-		var service = new gcm.Sender(apiKey);
-		var message = new gcm.Message({
-			priority : "high",
-			sound : "default"
+		var serverKey = "AAAAy66YFns:APA91bHa_RXSrxCHUYlrVW5fl89dxfLx02sjsby6OEhPPqgKi0fF66BFNNxHSUhyOmK8PQ_Oj2bfADAsMu_MPUyDpL08qmIPddsMMcRNmGVB-SdMPHZ_cothPtNyGNMY09pWVW32Zi77";
+		var fcm = new FCM(serverKey);
+		var message = {
+			    to: deviceToken, // required fill with device token or topics
+			    "content_available":true,
+			    "priority": "high",
+			    collapse_key: '', 
+			    data: pushData,
+			    notification: {
+			        title: 'hBuddy Notification',
+			        body: pushMsg
+			    }
+			};
+		
+		fcm.send(message, function(err, response){
+		    if (err) {
+		        console.log("Error in sending PushNotification: >> ", err);
+		    } 
+		    
+		    console.log("PushNotification sent and got response: ", response);
+		    
 		});
-		message.contentAvailable = true;
-		message.delayWhileIdle = true;
-		message.timeToLive = 3;
-		message.dryRun = true;
-
-		message.addData(pushData);
-
-		message.addNotification({
-			title : "GransLive Notification",
-			icon : "ic_launcher",
-			body : pushMsg,
-			priority : 2,
-			sound : "default"
-		});
-
-		service.send(message, {
-			registrationTokens : registrationIds
-		}, function(err, response) {
-			if (err)
-				console.error(err);
-			else
-				console.log(response);
-		});
+		
 	}
 
 };

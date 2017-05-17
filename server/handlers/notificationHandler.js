@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	var commonHandler = require('../../server/handlers/commonHandler')();
 	var emailHandler = require('../../server/handlers/emailHandler')();
-	var gcm = require('node-gcm');
+	var FCM = require('fcm-push');
 	var Notification;
 	var UserSetting;
 
@@ -70,35 +70,26 @@ module.exports = function(app) {
 	methods.sendPushNotification = function(pushData, pushMsg, registrationIds) {
 		console.log('IN notificationHandler.sendPushNotification: >> ', pushMsg);
 		console.log('IN notificationHandler.registrationIds: >> ', registrationIds);
-		var apiKey = "AAAAy66YFns:APA91bHa_RXSrxCHUYlrVW5fl89dxfLx02sjsby6OEhPPqgKi0fF66BFNNxHSUhyOmK8PQ_Oj2bfADAsMu_MPUyDpL08qmIPddsMMcRNmGVB-SdMPHZ_cothPtNyGNMY09pWVW32Zi77";
-		var service = new gcm.Sender(apiKey);
-		var message = new gcm.Message({
-			priority : "high",
-			sound : "default"
+		var serverKey = "AAAAy66YFns:APA91bHa_RXSrxCHUYlrVW5fl89dxfLx02sjsby6OEhPPqgKi0fF66BFNNxHSUhyOmK8PQ_Oj2bfADAsMu_MPUyDpL08qmIPddsMMcRNmGVB-SdMPHZ_cothPtNyGNMY09pWVW32Zi77";
+		var fcm = new FCM(serverKey);
+		var message = {
+			    to: registrationIds.join(), // required fill with device token or topics
+			    collapse_key: 'hbuddy_collapse_key', 
+			    data: pushData,
+			    notification: {
+			        title: 'hBuddy Notification',
+			        body: pushMsg
+			    }
+			};
+		
+		fcm.send(message, function(err, response){
+		    if (err) {
+		        console.log("Error in sending PushNotification: >> ", err);
+		    } else {
+		        console.log("PushNotification Successfully sent with response: ", response);
+		    }
 		});
-		message.contentAvailable = true;
-		message.delayWhileIdle = true;
-		message.timeToLive = 3;
-		message.dryRun = true;
-
-		message.addData(pushData);
-
-		message.addNotification({
-			title : "hBuddy Notification",
-			icon : "ic_launcher",
-			body : pushMsg,
-			priority : 2,
-			sound : "default"
-		});
-
-		service.send(message, {
-			registrationTokens : registrationIds
-		}, function(err, response) {
-			if (err)
-				console.error(err);
-			else
-				console.log(response);
-		});
+		
 	};
 
 	return methods;
