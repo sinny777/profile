@@ -24,7 +24,7 @@ module.exports = function(Place, Member) {
 	
 	Place.observe('before save', function updateTimestamp(ctx, next) {
 		console.log('\n\nInside Place.js before save: ');
-		  if (ctx.instance) {
+		  if (ctx.instance) {			  
 			  if(!ctx.instance.audit){
 				  ctx.instance.audit = {};
 			  }
@@ -36,8 +36,7 @@ module.exports = function(Place, Member) {
 			  if(!ctx.data.audit){
 				  ctx.data.audit = {};
 			  }
-			  ctx.data.audit.modified = new Date();
-			  
+			  ctx.data.audit.modified = new Date();			  
 		  }
 		 return next();
 		});

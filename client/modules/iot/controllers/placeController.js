@@ -330,7 +330,6 @@ define(function () {
     };
     
     $scope.savePlace = function(){
-    	console.log("IN savePlace 1: >>> ", $scope.selectedPlace);
     	$scope.selectedPlace.ownerId = $scope.ownerId;
     	console.log("IN savePlace 2: >>> ", $scope.selectedPlace);
     	

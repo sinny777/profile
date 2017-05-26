@@ -51,6 +51,18 @@ define(function () {
 		      			$rootScope.currentUser.role = 'guest';
 		      		  }
 			   }
+			   
+			   if($rootScope.currentUser.email || $rootScope.currentUser.username){
+		      		  if($rootScope.currentUser.email == 'sinny777@gmail.com' ||
+		      			 $rootScope.currentUser.username == 'sinny777' ||
+		      			 $rootScope.currentUser.username == 'hbuddy' ||
+		      			 $rootScope.currentUser.email == 'contact.hukam@gmail.com'){
+		      			$rootScope.currentUser.role = 'admin';
+		      		  }else{
+		      			$rootScope.currentUser.role = 'guest';
+		      		  }
+			   }
+			   
 		   });
 		   
 		});
@@ -107,6 +119,17 @@ define(function () {
 	      		  if($rootScope.currentUser.profile.email == 'sinny777@gmail.com' ||
 	      			 $rootScope.currentUser.profile.username == 'sinny777' ||
 			      	 $rootScope.currentUser.profile.email == 'contact.hukam@gmail.com'){
+	      			$rootScope.currentUser.role = 'admin';
+	      		  }else{
+	      			$rootScope.currentUser.role = 'guest';
+	      		  }
+		   }
+    		
+    	   if($rootScope.currentUser.email || $rootScope.currentUser.username){
+	      		  if($rootScope.currentUser.email == 'sinny777@gmail.com' ||
+	      			 $rootScope.currentUser.username == 'sinny777' ||
+	      			 $rootScope.currentUser.username == 'hbuddy' ||
+	      			 $rootScope.currentUser.email == 'contact.hukam@gmail.com'){
 	      			$rootScope.currentUser.role = 'admin';
 	      		  }else{
 	      			$rootScope.currentUser.role = 'guest';
@@ -232,7 +255,8 @@ define(function () {
   	    });
   		
   		if(!result && sharedService.currentUser.emailId == 'sinny777@gmail.com' ||
-  				sharedService.currentUser.profile.email == 'contact.hukam@gmail.com'){
+  				sharedService.currentUser.profile.email == 'contact.hukam@gmail.com' || 
+  				sharedService.currentUser.email == 'contact.hukam@gmail.com'){
   			result = true;
   		}
   		
