@@ -25,6 +25,10 @@
       "type": "string",
       "required": false
     },
+    "placeId": {
+        "type": "string",
+        "required": false
+    },
     "mfgDate": {
       "type": "date",
       "required": false
