@@ -35,14 +35,13 @@ var methods = {};
 	function handleConversationResponse(err, conversationResp, cb){
 		var response = {conversationResp: conversationResp};
 		
-		if(conversationResp.intents && conversationResp.intents.length > 0 && conversationResp.intents[0] == 'appliance_action'){
+		if(conversationResp.intents && conversationResp.intents.length > 0 
+			&& conversationResp.intents[0].intent == 'appliance_action'){
 			handleApplianceAction(response, function(err, resp){
 				cb(err, resp);
 				respSent = true;
 			});
-		}
-		
-		if(conversationResp.context){
+		}else if (conversationResp.context){
 			var next_action = conversationResp.context.next_action;
 			var respSent = false;
 			if(!next_action){
@@ -96,8 +95,25 @@ var methods = {};
 	};
 	
 	function handleApplianceAction(response, cb){
-		console.log("IN handleApplianceAction: >>> ", response);
-		if(conversationResp.context && conversationResp.context.gatewayId){
+		if(response.conversationResp.context && response.conversationResp.context.gatewayId){
+			console.log("IN handleApplianceAction, Fetch Data for Gateway: >>> ", response.conversationResp);
+			
+			if(response.conversationResp.entities && response.conversationResp.entities.length > 0){
+				var area, action, appliance;
+				for(var i = 0; i < response.conversationResp.entities.length; i++){
+					var entity = response.conversationResp.entities[i];
+					if(entity.entity == 'actions'){
+						action = entity.value;
+					}
+					if(entity.entity == 'area'){
+						area = entity.value;
+					}
+					if(entity.entity == 'appliance'){
+						appliance = entity.value;
+					}
+				}
+				console.log("ACTION: ", action, ", AREA: ", area, ", APPLIANCE: ", appliance);
+			}		
 			
 		}
 		cb(null, response);
