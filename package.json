@@ -9,7 +9,9 @@
   "private": true,
   "scripts": {
     "start": "node server/server.js",
-    "pretest": "jshint ."
+    "pretest": "jshint .",
+    "monitor": "nodemon server/server.js",
+    "deploy": "gcloud app deploy app.yaml"
   },
   "dependencies": {
     "body-parser": "^1.9.0",
@@ -33,6 +35,7 @@
     "loopback-component-explorer": "^2.1.0",
     "loopback-component-passport": "^2.1.0",
     "loopback-connector-cloudant": "^1.0.7",
+    "loopback-context": "^3.1.0",
     "loopback-datasource-juggler": "^2.39.0",
     "node-cache": "latest",
     "node-gcm": "^0.14.4",
@@ -62,5 +65,5 @@
     "type": "",
     "url": ""
   },
-  "description": "Hukam Home Automation"
+  "description": "hBuddy - Hukam Home Automation"
 }

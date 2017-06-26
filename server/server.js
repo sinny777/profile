@@ -1,6 +1,9 @@
 var loopback = require('loopback');
+var LoopBackContext = require('loopback-context');
 var boot = require('loopback-boot');
 var serveStatic = require('serve-static');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
 
 /*
 var session = require('express-session');
@@ -18,7 +21,7 @@ var loopbackPassport = require('loopback-component-passport');
 var PassportConfigurator = loopbackPassport.PassportConfigurator;
 var passportConfigurator = new PassportConfigurator(app);
 
-app.use(serveStatic(__dirname + '/client'));
+app.use(serveStatic(__dirname + '/web/dist'));
 
 var bodyParser = require('body-parser');
 app.middleware('parse', bodyParser.json({limit: 1024*1024*50, type:'application/json'}));
@@ -45,39 +48,35 @@ app.middleware('auth', loopback.token({
   model: app.models.AccessToken
 }));
 
+/*
 app.use(loopback.context());
-//The access token is only available after boot
 app.use(loopback.token({
 	model: app.models.AccessToken
 }));
+*/
 
+app.use(LoopBackContext.perRequest());
+app.use(loopback.token());
 app.use(function setCurrentUser(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//	console.log('req.accessToken: >>> ', req.accessToken);
-	next();
-	/*
-	 var loopbackContext = loopback.getCurrentContext();
-	 if (loopbackContext) {
-		 if (!req.accessToken || loopbackContext.get('currentUser')) {
-		        return next();
-		    }else{
-		    	console.log('currentUser: >>> ', loopbackContext.get('currentUser'));
-		    	app.models.MyUser.findById(req.accessToken.userId, function(err, user) {
-		            if (err) {
-		              return next(err);
-		            }
-		            if (!user) {
-		              return next(new Error('No user with this access token was found.'));
-		            }
-
-		            loopbackContext.set('currentUser', user);
-		           return next();
-		         });
-		    }
-	 }
-	*/
+  if (!req.accessToken) {
+    return next();
+  }
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  app.models.MyUser.findById(req.accessToken.userId, function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(new Error('No user with this access token was found.'));
+    }
+    var loopbackContext = LoopBackContext.getCurrentContext();
+    if (loopbackContext) {
+      loopbackContext.set('currentUser', user);
+    }
+    next();
+  });
 });
 
 passportConfigurator.init();
@@ -128,10 +127,11 @@ boot(app, bootOptions, function(err) {
 	}
 });
 
-app.use(loopback.cookieParser(app.get('cookieSecret')));
+//app.use(loopback.cookieParser(app.get('cookieSecret')));
+app.use(cookieParser(app.get('cookieSecret')));
 
-app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
-app.middleware('session', loopback.session({
+app.middleware('session:before', cookieParser(app.get('cookieSecret')));
+app.middleware('session', expressSession({
   secret: 'kitty',
   saveUninitialized: true,
   duration: 30 * 60 * 1000,

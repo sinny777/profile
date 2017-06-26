@@ -1,5 +1,5 @@
 /**
- * Server Configuration for Office
+ * OFFICE ENV Server Configuration
  */
 'use strict';
 
@@ -22,7 +22,7 @@ module.exports.get = function() {
 				    "type": "shared"
 		    	},
 				"cloudantNOSQLDB":{
-					"username": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
+					  "username": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix",
 					  "password": "5bfe2ecae5c815202c4d78db2600812ef5099f337a6deb6dba96ce0b7a5b0e13",
 					  "host": "acb0bba8-0370-47c4-8e49-5ad1b1050873-bluemix.cloudant.com",
 					  "port": 443,

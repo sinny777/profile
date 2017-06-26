@@ -1,4 +1,5 @@
 var loopback = require('loopback');
+var LoopBackContext = require('loopback-context');
 
 module.exports = function(Place, Member) {
 	
@@ -51,9 +52,10 @@ module.exports = function(Place, Member) {
 		console.log('accessToken: >> ', accessToken);
 	    
 	    if(loopback){
-	    	var loopbackContext = loopback.getCurrentContext();
-	    	var currentUser = Place.app.currentUser;
-	    	console.log('currentUser 3: ' , currentUser);
+	    	
+	    	var loopbackContext = LoopBackContext.getCurrentContext();
+	        var currentUser = loopbackContext && loopbackContext.get('currentUser');
+	    	console.log('CurrentUser From LoopbackContext: ' , currentUser);
 		    
 		    if(!currentUser){
 		    	currentUser = context.req.user;
@@ -61,16 +63,15 @@ module.exports = function(Place, Member) {
 	    	
 	    	console.log("IN place.js current userId: ", userId, ", query: ", context.filter+", currentUser: ", currentUser);
 	    	if(currentUser){
-	    		findMembers(currentUser.id);
+	    		findMembers(currentUser);
 	    	}
 	    }
     	
 	   return next();
 	  });
 	  
-	  findMembers = function(memberId){
-		  console.log('IN place.js, findMembers for memberId: ', memberId);
-		  var loopback = require('loopback');
+	  findMembers = function(currentUser){
+		  console.log('IN place.js, findMembers for memberId: ', currentUser.id);
 		  var findReq = {filter: {where: {"username": "sinny777@gmail.com"}}};
 	  }
 	

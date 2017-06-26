@@ -1,12 +1,23 @@
 {
   "initial:before": {
 	  "loopback#favicon": {
-	    	"params": "$!../client/favicon.ico"
+	    	"params": "$!../web/dist/favicon.ico"
 	    }
   },
+  "initial": {
+	    "compression": {},
+	    "loopback-context#per-request": {},
+	    "cors": {
+	      "params": {
+	        "origin": true,
+	        "credentials": true,
+	        "maxAge": 86400
+	      }
+	    }
+	  },
   "files": {
     "loopback#static": {
-      "params": "$!../client"
+      "params": "$!../web/dist"
     }
   },
   "final": {

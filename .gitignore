@@ -19,7 +19,10 @@
 coverage
 node_modules
 npm-debug.log
-client/scripts/js/vendor
+**/node_modules
+*/node_modules
+web/node_modules
+web/dist
 lib
 .apiconnect
 .settings

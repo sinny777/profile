@@ -1,11 +1,12 @@
 {
   "initial:before": {
     "loopback#favicon": {
-      "params": "$!../client/favicon.ico"
+      "params": "$!../web/dist/favicon.ico"
     }
   },
   "initial": {
     "compression": {},
+    "loopback-context#per-request": {},
     "cors": {
       "params": {
         "origin": true,
@@ -26,7 +27,7 @@
   },
   "files": {
     "loopback#static": {
-      "params": "$!../client"
+      "params": "$!../web/dist"
     }
   },
   "final": {

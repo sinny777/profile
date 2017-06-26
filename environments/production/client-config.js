@@ -1,4 +1,6 @@
-/*global define */
+/*
+ * PRODUCTION CLIENT CONFIGURATION
+ */
 
 // API_URL: 'http://hbuddy.hukam.in/api'
 // API_URL: 'http://localhost:3000/api'
@@ -10,7 +12,7 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'LOCAL',
-			API_URL: '//hbuddy.hukam.in/api',
+			API_URL: '//hukam-157906.appspot.com/api',
 			IOT_CONFIG:{
 				"org": "rqeofj",
 			    "id": "a-rqeofj-i7nm1fdo5d",
