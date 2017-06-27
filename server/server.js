@@ -4,15 +4,7 @@ var boot = require('loopback-boot');
 var serveStatic = require('serve-static');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
-
-/*
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
-var store = new RedisStore({ host: '127.0.0.1' });
-if (require.main === module) {
-   store.client.unref();
-}
-*/
+var path = require('path');
 
 var app = module.exports = loopback();
 
@@ -21,7 +13,34 @@ var loopbackPassport = require('loopback-component-passport');
 var PassportConfigurator = loopbackPassport.PassportConfigurator;
 var passportConfigurator = new PassportConfigurator(app);
 
-app.use(serveStatic(__dirname + '/web/dist'));
+ app.use(serveStatic(__dirname + '/client/dist'));
+ app.use('/api', loopback.rest());
+
+ // app.get('/home', serveStatic(__dirname + '/client/dist'));
+
+var ignoredPaths = ['/api', '/explorer'];
+app.all('/*', function(req, res, next) {
+  if(!startsWith(req.url, ignoredPaths)){
+    // console.log("URL Starts With 1: >> ", req.url);
+    if(startsWith(req.url, ['/home', '/iot'])){
+        res.sendFile('index.html', { root: path.resolve(__dirname, '..', 'client/dist') });
+    }else{
+        res.sendFile(path.resolve(req.url), { root: path.resolve(__dirname, '..', 'client/dist') });
+    }
+  } else {
+      // console.log("URL Starts With 2: >> ", req.url);
+      next();
+  }
+});
+
+
+function startsWith(string, array) {
+  for(i = 0; i < array.length; i++)
+    if(string.startsWith(array[i]))
+      return true;
+  return false;
+}
+
 
 var bodyParser = require('body-parser');
 app.middleware('parse', bodyParser.json({limit: 1024*1024*50, type:'application/json'}));
@@ -98,14 +117,14 @@ app.start = function() {
 	    }
 	  });
 	};
-	
+
 	app.on('uncaughtException', function(err) {
 	    if(err.errno === 'EADDRINUSE')
 	         console.log('err: >>>>' , err);
 	    else
 	         console.log(err);
 	    app.exit(1);
-	});  
+	});
 
 //The ultimate error handler.
 app.use(loopback.errorHandler());
@@ -158,4 +177,3 @@ for (var s in config) {
 	c.session = c.session !== false;
 	passportConfigurator.configureProvider(s, c);
 	}
-
