@@ -27,13 +27,9 @@ let providers = {
   };
 
 const appRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'home',      component: HomeComponent },
-  { path: 'iot/hbuddy', component: HBuddyComponent },
-  { path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
+  { path: 'public/dashboard', component: DashboardComponent },
+  { path: '',      component: HomeComponent },
+  { path: 'iot/hbuddy', component: HBuddyComponent }
 ];
 
 @NgModule({

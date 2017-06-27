@@ -21,7 +21,7 @@ var passportConfigurator = new PassportConfigurator(app);
 var ignoredPaths = ['/api', '/explorer', '/status'];
 app.all('/*', function(req, res, next) {
   if(!startsWith(req.url, ignoredPaths)){
-    if(startsWith(req.url, ['/home', '/iot'])){
+    if(req.url == '/' || startsWith(req.url, ['/public', '/iot', '/account'])){
         res.sendFile('index.html', { root: path.resolve(__dirname, '..', 'client/dist') });
     }else{
         res.sendFile(path.resolve(req.url), { root: path.resolve(__dirname, '..', 'client/dist') });
