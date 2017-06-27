@@ -18,17 +18,15 @@ var passportConfigurator = new PassportConfigurator(app);
 
  // app.get('/home', serveStatic(__dirname + '/client/dist'));
 
-var ignoredPaths = ['/api', '/explorer'];
+var ignoredPaths = ['/api', '/explorer', '/status'];
 app.all('/*', function(req, res, next) {
   if(!startsWith(req.url, ignoredPaths)){
-    // console.log("URL Starts With 1: >> ", req.url);
     if(startsWith(req.url, ['/home', '/iot'])){
         res.sendFile('index.html', { root: path.resolve(__dirname, '..', 'client/dist') });
     }else{
         res.sendFile(path.resolve(req.url), { root: path.resolve(__dirname, '..', 'client/dist') });
     }
   } else {
-      // console.log("URL Starts With 2: >> ", req.url);
       next();
   }
 });
