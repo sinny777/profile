@@ -43,11 +43,7 @@ module.exports.get = function() {
 						"silent": true
 					},
 					"workspace_id": "ccc639e8-9b25-4226-8611-1f4386000344"
-				},
-				"alchemy": {
-					  "url": "https://gateway-a.watsonplatform.net/calls",
-					  "apikey": "90847a470740824a0fe97f42681e7c98285b7962"
-				}
+				}				
 			}
 		}
     	

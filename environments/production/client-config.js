@@ -12,7 +12,7 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'LOCAL',
-			API_URL: '//hukam-157906.appspot.com/api',
+			API_URL: '//hukam-dev.mybluemix.net/api',
 			IOT_CONFIG:{
 				"org": "rqeofj",
 			    "id": "a-rqeofj-i7nm1fdo5d",
