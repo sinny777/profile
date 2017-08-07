@@ -9,25 +9,21 @@
     "audit": {
       "type": "object"
     },
-    "description": {
+    "connectedToId": {
       "type": "string",
       "required": false
     },
-    "devices": {
-      "type": "object",
+    "connectedToType": {
+      "type": "string",
       "required": false
     },
-    "sensors": {
-      "type": "object",
+    "description": {
+      "type": "string",
       "required": false
     },
     "gatewayId": {
       "type": "string",
       "required": false
-    },
-    "placeId": {
-        "type": "string",
-        "required": false
     },
     "mfgDate": {
       "type": "date",
@@ -35,6 +31,10 @@
     },
     "owner": {
       "type": "object",
+      "required": false
+    },
+    "placeId": {
+      "type": "string",
       "required": false
     },
     "status": {
@@ -56,15 +56,11 @@
     },
     "uniqueIdentifier": {
       "type": "string",
-      "required": true,
+      "required": false,
       "index": false
     },
-    "connectedToType": {
-      "type": "string",
-      "required": false
-    },
-    "connectedToId": {
-      "type": "string",
+    "sensors": {
+      "type": "object",
       "required": false
     }
   },

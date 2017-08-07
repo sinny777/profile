@@ -27,11 +27,12 @@ module.exports = function(app) {
 //	testNLCDateParser();
 	
 //	testConversation();
+//	testDeviceUpdate();
 	
 	function testConversation(){
 		var Conversation = app.models.Conversation;
 		var conversationReq = {"body":{
-										"params": {"input": "Switch on the light"},
+										"params": {"input": "Switch on the living room light"},
 										"context": {}
 									}
 							  };
@@ -156,7 +157,7 @@ module.exports = function(app) {
 	};
 
 	function subscribeToGateway() {
-		appClient.subscribeToDeviceEvents("GransLiveGateway", "+", "+", "json");
+		appClient.subscribeToDeviceEvents("HukamGateway", "+", "+", "json");
 	};
 	
 	function publishWaterTankData(){
@@ -164,7 +165,7 @@ module.exports = function(app) {
 			var timeNow = new Date();
 			var deviceWithData = {data: {type: "watertank", uniqueId: "WT-ABC123", gatewayId: appConfig.gatewayId, ts: timeNow, distance: "150"}};
 			var sensorData = {"d": deviceWithData.data};
-			appClient.publishDeviceEvent("GransLiveGateway", appConfig.gatewayId, "cloud", "json", sensorData);
+			appClient.publishDeviceEvent("HukamGateway", appConfig.gatewayId, "cloud", "json", sensorData);
 			console.log("Published simulated Watertank data: >>> ", sensorData);
 		}, 120000);
 	};
@@ -213,6 +214,38 @@ module.exports = function(app) {
 		    
 		});
 		
-	}
+	};
+	
+	function testDeviceUpdate(){
+		console.log("IN testDeviceUpdate: >>> ");
+		var Device = app.models.Device;
+		
+		var device = {
+			    "audit": {
+			        "created": "2017-08-04T11:23:17.215Z",
+			        "modified": "2017-08-04T11:42:32.268Z"
+			    },
+			    "analog": false,
+			    "config": null,
+			    "description": "Digital Switch 2",
+			    "deviceId": "A010-E365-F155",
+			    "deviceIndex": 2,
+			    "deviceValue": 1,
+			    "deviceValueUnits": null,
+			    "parentId": "AE2C100952FBC1FB",
+			    "status": "OFF",
+			    "title": "LED",
+			    "type": "device",
+			    "id": "1cee9f1f2fbc332c7199d1e0bb91651d"
+			};
+		
+		Device.upsert(device, function(err, updatedDevice){
+    		if(err){
+    			console.log("ERROR IN UPDATING DEVICE: >> ", err);
+    		}else{
+    			console.log("<<<< BOARD DEVICE UPDATED SUCCESSFULLY >>>>>>> ", updatedDevice);
+    		}
+    	});
+	};
 
 };

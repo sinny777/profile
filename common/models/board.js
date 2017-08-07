@@ -36,7 +36,7 @@ module.exports = function(Board) {
 			  }
 			  if(!board.id){
 				  board.audit.created = new Date();
-				  board.status = "inactive";
+				  board.status = "INACTIVE";
 			  }
 			  board.audit.modified = new Date();
 		  } else {
@@ -53,7 +53,7 @@ module.exports = function(Board) {
 		  }
 		  
 		 return next();
-		});
+	});
 	
 	Board.deviceChangeTrigger = function(req, cb){
 		var deviceHandler = require('../../server/handlers/deviceHandler')(Board.app);

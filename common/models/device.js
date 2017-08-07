@@ -2,6 +2,45 @@
 
 module.exports = function(Device) {
 	
+	Device.observe('before save', function updateTimestamp(ctx, next) {
+		  var device = {};
+		  if (ctx.instance) {
+			  device = ctx.instance;
+			  if(!device.audit){
+				  device.audit = {};
+			  }
+			  if(!device.id){
+				  device.audit.created = new Date();
+				  device.status = "OFF";
+			  }
+			  device.audit.modified = new Date();
+		  } else {
+			  device = ctx.data;
+			  if(!device.audit){
+				  device.audit = {};
+			  }
+			  device.audit.modified = new Date();
+		  }
+		  
+		  if(!device.deviceId){
+			  //TODO: Board should always have a UniquiId set before it is sent for saving
+			  device.deviceId = generateUUID();
+		  }
+		  
+		 return next();
+	});
+	
+	function generateUUID() {
+	    var d = new Date().getTime();
+	    var uuid = 'yxxx-yxxx-yxxx'.replace(/[xy]/g,function(c) {
+	        var r = (d + Math.random()*8)%8 | 0;
+	        d = Math.floor(d/16);
+	        return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+	    });
+	    return uuid.toUpperCase();
+	};
+	
+	/*
 	var iotPlatformHandler = require('../../server/handlers/iotPlatformHandler')();
 	
 	Device.observe('before save', function updateTimestamp(ctx, next) {
@@ -68,5 +107,6 @@ module.exports = function(Device) {
 		  }
 		  
 		});
+	*/
 
 };

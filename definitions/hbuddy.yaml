@@ -88,7 +88,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -204,7 +204,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -317,7 +317,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -471,7 +471,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -587,7 +587,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -700,7 +700,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -854,7 +854,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -970,7 +970,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1083,7 +1083,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1214,7 +1214,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1330,7 +1330,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1443,7 +1443,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1597,7 +1597,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1713,7 +1713,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1826,7 +1826,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2127,7 +2127,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2243,7 +2243,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2356,7 +2356,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3158,7 +3158,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3274,7 +3274,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3387,7 +3387,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3818,7 +3818,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3934,7 +3934,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4047,7 +4047,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4193,7 +4193,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4309,7 +4309,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4422,7 +4422,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4568,7 +4568,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4684,7 +4684,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4797,7 +4797,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4994,7 +4994,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5110,7 +5110,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5223,7 +5223,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5354,7 +5354,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5470,7 +5470,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5583,7 +5583,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5714,7 +5714,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5830,7 +5830,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5943,7 +5943,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6074,7 +6074,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6190,7 +6190,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6303,7 +6303,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6434,7 +6434,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6550,7 +6550,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6663,7 +6663,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6809,7 +6809,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6925,7 +6925,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: Filter defining fields and include
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -7038,7 +7038,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit'
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -7130,10 +7130,10 @@ definitions:
         type: string
       created:
         type: string
-        format: date
+        format: date-time
       lastUpdated:
         type: string
-        format: date
+        format: date-time
       id:
         type: string
     required:
@@ -7153,10 +7153,10 @@ definitions:
         type: object
       created:
         type: string
-        format: date
+        format: date-time
       modified:
         type: string
-        format: date
+        format: date-time
       id:
         type: number
         format: double
@@ -7177,10 +7177,10 @@ definitions:
         type: object
       created:
         type: string
-        format: date
+        format: date-time
       modified:
         type: string
-        format: date
+        format: date-time
       id:
         type: number
         format: double
@@ -7205,10 +7205,10 @@ definitions:
         type: string
       created:
         type: string
-        format: date
+        format: date-time
       lastUpdated:
         type: string
-        format: date
+        format: date-time
       id:
         type: number
         format: double
@@ -7226,7 +7226,7 @@ definitions:
         format: double
       created:
         type: string
-        format: date
+        format: date-time
       userId:
         type: string
     required:
@@ -7261,10 +7261,10 @@ definitions:
         type: string
       created:
         type: string
-        format: date
+        format: date-time
       modified:
         type: string
-        format: date
+        format: date-time
     required:
       - name
     additionalProperties: false
@@ -7353,17 +7353,21 @@ definitions:
     properties:
       audit:
         type: object
+      connectedToId:
+        type: string
+      connectedToType:
+        type: string
       description:
         type: string
-      devices:
-        type: object
       gatewayId:
         type: string
       mfgDate:
         type: string
-        format: date
+        format: date-time
       owner:
         type: object
+      placeId:
+        type: string
       status:
         type: string
       subType:
@@ -7374,14 +7378,10 @@ definitions:
         type: string
       uniqueIdentifier:
         type: string
-      connectedToType:
-        type: string
-      connectedToId:
-        type: string
+      sensors:
+        type: object
       id:
         type: string
-    required:
-      - uniqueIdentifier
     additionalProperties: false
   Configuration:
     properties:
@@ -7402,7 +7402,7 @@ definitions:
         type: string
       lastExecutedTime:
         type: string
-        format: date
+        format: date-time
       placeId:
         type: string
       settings:
@@ -7433,7 +7433,7 @@ definitions:
         type: string
       timestamp:
         type: string
-        format: date
+        format: date-time
       id:
         type: string
     additionalProperties: false
@@ -7465,28 +7465,38 @@ definitions:
     additionalProperties: false
   Device:
     properties:
+      analog:
+        type: boolean
+      config:
+        type: object
+      description:
+        type: string
       deviceId:
-        description: Unique Identification for IoT platform
         type: string
-      deviceInfo:
-        type: object
-      location:
-        type: object
-      metadata:
-        type: object
-      registration:
-        type: object
+      deviceIndex:
+        type: number
+        format: double
+      deviceValue:
+        type: number
+        format: double
+      deviceValueUnits:
+        type: string
+      parentId:
+        type: string
       status:
-        type: object
-      clientId:
         type: string
-      typeId:
+      title:
         type: string
+      type:
+        type: string
+      updatedAt:
+        type: string
+        format: date-time
       id:
         type: string
     required:
-      - deviceId
-      - typeId
+      - deviceIndex
+      - parentId
     additionalProperties: false
 basePath: /api
 swagger: '2.0'
