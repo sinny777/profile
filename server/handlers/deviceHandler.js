@@ -3,16 +3,16 @@
  * Make sure app is provided while instantiating this class and calling any method
  */
 module.exports = function(app) {
-	
+
 	var notificationHandler = require('../../server/handlers/notificationHandler')(app);
 	var Device;
 	var Board;
 	var PlaceArea;
-	
+
 	var bluemix = require('../../common/config/bluemix');
 	var dbCredentials = bluemix.getServiceCreds('cloudantNoSQLDB');
 	var cloudant = require('cloudant')(dbCredentials.url);
-    
+
 var methods = {};
 
 	methods.handleDeviceEvent = function(deviceType, deviceId, eventType,
@@ -23,9 +23,10 @@ var methods = {};
 			methods.handleDevicePayload(jsonPayload);
 		} catch (err) {
 			// TODO: Handle Invalid Payload
+			console.log("INVALID PATLOAD: >>> ", err);
 		}
 	};
-	
+
 	methods.deviceChangeTrigger = function(payload){
 		console.log("IN deviceHandler.deviceChangeTrigger: >>> ", payload);
 		var msg = {};
@@ -39,7 +40,7 @@ var methods = {};
 			}
 		}
 	};
-	
+
 	methods.sensorDataTrigger = function(payload){
 		console.log("IN deviceHandler.sensorDataTrigger: >>> ", payload);
 		var msg = {};
@@ -53,28 +54,62 @@ var methods = {};
 			}
 		}
 	};
-	
+
 	methods.handleDevicePayload = function(payload){
 		console.log('IN deviceHandler.handleDevicePayload with payload: >>>> ', payload);
 		if(payload.d.boardId){
 			if(payload.d.gatewayId){
-				methods.findBoard(payload.d.boardId, payload.d.gatewayId, function(err, boards) { 
+				methods.findDevice(payload.d.boardId, payload.d.deviceIndex, function(err, devices) {
 					if(err){
 						console.log("ERROR IN finding Board with uniqueIdentifier: ", payload.d.boardId, err);
 					}else{
-						if(boards && boards.length > 0){
-							var board = boards[0];
-							console.log("RESP FROM FIND BOARD: >>> ", board.title);
-							methods.saveDeviceData(payload, board);
+						if(devices && devices.length > 0){
+							var device = devices[0];
+							console.log("RESP FROM FIND DEVICE: >>> ", device.title);
+							if(device.deviceIndex == payload.d.deviceIndex){
+					    	device.deviceValue = payload.d.deviceValue;
+					    	device.audit.modified = new Date();
+								device.status = payload.d.status;
+								if(!Device){
+									Device = app.models.Device;
+								}
+					    	Device.upsert(device, function(err, updatedDevice){
+					    		if(err){
+					    			console.log("ERROR IN UPDATING DEVICE: >> ", err);
+					    		}else{
+					    			console.log("<<<< DEVICE UPDATED SUCCESSFULLY >>>>>>> ", updatedDevice);
+					    		}
+					    	});
+					    }
 						}else{
-							console.log("NO BOARDS FOUND FOR PAYLOAD: ", payload);
-						}						
+							console.log("NO DEVICE FOUND FOR PAYLOAD: ", payload);
+						}
 					}
 				});
 			}
 		}
 	};
-	
+
+	methods.findDevice = function(boardId, deviceIndex, cb){
+		try{
+			if(boardId && deviceIndex){
+					var findReq =  {where: {"parentId": boardId, "deviceIndex": deviceIndex}};
+					console.log('IN findDevice, with boardId: ', boardId, ", deviceIndex: ", deviceIndex, ', findReq: ', findReq);
+					if(!Device){
+						Device = app.models.Device;
+					}
+					Device.find(findReq, function(err, resp) {
+						cb(err, resp);
+					});
+			}else{
+				cb("boardId or deviceIndex can not be null", null);
+			}
+		}catch(err){
+			console.log(err);
+			cb("Some Error in findDevice: " +err, null);
+		}
+	};
+
 	methods.findBoard = function(boardId, gatewayId, cb){
 		try{
 			if(boardId){
@@ -84,7 +119,7 @@ var methods = {};
 					if(!Board){
 						Board = app.models.Board;
 					}
-					Board.find(findReq, function(err, resp) { 
+					Board.find(findReq, function(err, resp) {
 						cb(err, resp);
 					});
 				}else{
@@ -98,85 +133,39 @@ var methods = {};
 			cb("Some Error in findBoard: " +err, null);
 		}
 	};
-	
+
 	methods.findPlacesForGatewayId = function(gatewayId, cb){
 		console.log('IN findPlaceAreasForGatewayId with gatewayId: ', gatewayId);
 		var findReq =  {where: {"gatewayId": gatewayId}};
 		if(!Place){
 			Place = app.models.Place;
 		}
-		Place.find(findReq, function(err, resp) { 
+		Place.find(findReq, function(err, resp) {
 			cb(err, resp);
 		});
 	};
-	
+
 	methods.findPlaceAreasForPlaceId = function(placeId, cb){
 		console.log('IN findPlaceAreasForPlaceId with placeId: ', placeId);
 		var findReq =  {where: {"placeId": placeId}};
 		if(!PlaceArea){
 			PlaceArea = app.models.PlaceArea;
 		}
-		PlaceArea.find(findReq, function(err, resp) { 
+		PlaceArea.find(findReq, function(err, resp) {
 			cb(err, resp);
 		});
 	};
-	
+
 	methods.findPlaceArea = function(placeAreaId, cb){
 		console.log('IN findPlaceArea with placeAreaId: ', placeAreaId);
 		if(!PlaceArea){
 			PlaceArea = app.models.PlaceArea;
 		}
-		PlaceArea.findById(placeAreaId, function(err, resp) { 
+		PlaceArea.findById(placeAreaId, function(err, resp) {
 			cb(err, resp);
 		});
 	};
-	
-	methods.saveDeviceData = function(payload, board){
-		for (i = 0; i < board.devices.length; i++) {
-		    var device = board.devices[i];
-		    if(device.deviceIndex == payload.d.deviceIndex){
-		    	board.devices[i].value = payload.d.deviceValue;
-		    	
-		    	if(payload.d.deviceValue == 1){
-		    		board.devices[i].status = "ON";
-		    	}else{
-		    		board.devices[i].status = "OFF";
-		    	}
-		    	
-		    	if(payload.d.analogValue){
-		    		board.devices[i].analogValue = payload.d.analogValue;
-		    	}
-		    	
-		    	board.devices[i].updatedAt = new Date();
-		    	
-		    	Board.upsert(board, function(err, updatedBoard){
-		    		if(err){
-		    			console.log("ERROR IN UPDATING BOARD: >> ", err);
-		    		}else{
-		    			console.log("<<<< BOARD DEVICE UPDATED SUCCESSFULLY >>>>>>> ", board.devices[i]);
-		    		}
-		    	});
-		    	
-		    	if(board.connectedToType == "PlaceArea" && board.connectedToId){
-		    		methods.findPlaceArea(board.connectedToId, function(err, placeArea) { 
-						if(err){
-							console.log("ERROR IN finding PlaceArea with ID: ", board.placeAreaId, err);
-						}else{
-							console.log("RESP FROM FIND PLACEAREA: >>> ", placeArea.title);
-							if(placeArea){
-								notificationHandler.sendNotification(payload, board, placeArea, board.devices[i]);
-							}
-						}
-					});
-		    	}else{
-		    		console.log("In deviceHandler, BOARD CAN NOT BE SAVED: >>> ", board);
-		    	}
-		    	
-		    	break;
-		    }
-		}
-	};
-	
+
 	methods.getLatestSensorData = function(params, cb){
 		var startKey = [];
 		startKey.push(params.gatewayId);
@@ -194,7 +183,7 @@ var methods = {};
 			  if (!err) {
 				var result = [];
 			    if(resp.rows && resp.rows.length > 0){
-			    	for(var index in resp.rows) { 
+			    	for(var index in resp.rows) {
 						  var viewData = resp.rows[index];
 						  if(viewData.value && viewData.value.length > 0){
 							  var sensorData = {};
@@ -211,23 +200,23 @@ var methods = {};
 				  cb(err, null);
 			  }
 		});
-		
+
 	};
-	
+
 	methods.getLatestSensorDataBucket = function(){
 		var today = new Date();
-		
+
 		var year = today.getFullYear();
 		var month = today.getMonth() + 1;
 		if(month < 10){
 			month = "0"+month;
 		}
-		
+
 		var deviceDataBucket = "iotp_o6oosq_devicelogs_"+year+"-"+month;
 		return deviceDataBucket;
 	};
-	
-	
+
+
     return methods;
-    
+
 }
