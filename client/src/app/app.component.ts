@@ -35,7 +35,7 @@ export class AppComponent {
   }
   
   handleLogin(){
-    console.log("IN handleLogin: >>> ", JSON.stringify(credentials));
+    console.log("IN handleLogin: >>> ", JSON.stringify(this.credentials));
   }
 
   logout(){
