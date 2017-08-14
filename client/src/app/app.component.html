@@ -35,6 +35,17 @@
 										<li><a href="javascript:void(0);" (click)="logout();">Logout</a></li>
 								</ul>
 						</li>
+						<li *ngIf="currentUser && currentUser.email == 'sinny777@gmail.com'" class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Admin
+								</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+										<li><a target="_blank" href="https://console.bluemix.net/services/iotf-service/fcff5d8e-6106-4013-b5a6-26c1de9917fa" >IoT Platform</a></li>
+										<li><a target="_blank" href="https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html#/_all_dbs">CloudantDB</a></li>
+										<li><a target="_blank" href="https://watson-conversation.ng.bluemix.net/us-south/9cafee8e-239f-412a-ae15-5bb338f83803/workspaces">Conversation</a></li>
+										<li><a target="_blank" href="https://console.bluemix.net/devops/pipelines/56d9538c-ef70-4c9a-b3cc-0254e653eda8?env_id=ibm:yp:us-south">DevOps</a></li>
+								</ul>
+						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="material-icons">menu</i>
@@ -81,7 +92,7 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form class="form" method="" action="http://demos.creative-tim.com/material-kit-pro/index.html">
+					<form class="form" method="post" action="">
 						<p class="description text-center">Or Be Classical</p>
 						<div class="card-content">
 
@@ -89,14 +100,14 @@
 								<span class="input-group-addon">
 									<i class="material-icons">email</i>
 								</span>
-								<div class="form-group is-empty"><input type="text" class="form-control" placeholder="Email..."><span class="material-input"></span></div>
+								<div class="form-group is-empty"><input type="text" class="form-control" placeholder="Username" [(ngModel)]="credentials.email"><span class="material-input"></span></div>
 							</div>
 
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="material-icons">lock_outline</i>
 								</span>
-								<div class="form-group is-empty"><input type="password" placeholder="Password..." class="form-control"><span class="material-input"></span></div>
+								<div class="form-group is-empty"><input type="password" placeholder="Password" [(ngModel)]="credentials.password" class="form-control"><span class="material-input"></span></div>
 							</div>
 
 							<!-- If you want to add a checkbox to this form, uncomment this code
@@ -111,7 +122,7 @@
 					</form>
 				</div>
 				<div class="modal-footer text-center">
-					<a href="http://demos.creative-tim.com/material-kit-pro/index.html#pablo" class="btn btn-primary btn-simple btn-wd btn-lg">Get Started</a>
+					<a href="javascript:void(0);" (click)="handleLogin();" class="btn btn-primary btn-simple btn-wd btn-lg">Login</a>
 				</div>
 			</div>
 		</div>

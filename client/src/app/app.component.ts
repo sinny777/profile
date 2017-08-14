@@ -15,6 +15,11 @@ export class AppComponent {
 
   sub: any;
   currentUser: any;
+  credentials: any = {
+    email: "",
+    password: ""
+  };
+  
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
   signIn(provider){
@@ -27,6 +32,10 @@ export class AppComponent {
                   this.closeBtn.nativeElement.click();
                 }
     );
+  }
+  
+  handleLogin(){
+    console.log("IN handleLogin: >>> ", JSON.stringify(credentials));
   }
 
   logout(){
