@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "angular2-social-login";
 import { SharedService } from './services/shared.service';
 
@@ -9,18 +10,21 @@ import { SharedService } from './services/shared.service';
 })
 export class AppComponent {
 
-  constructor(public _auth: AuthService, public sharedService: SharedService){
-      this.currentUser = this.sharedService.getCurrentUser();
-   }
-
   sub: any;
   currentUser: any;
-  credentials: any = {
-    email: "",
-    password: ""
-  };
-  
+  loginForm: FormGroup;
+  post:any;
+
   @ViewChild('closeBtn') closeBtn: ElementRef;
+
+  constructor(public _auth: AuthService, public sharedService: SharedService, private fb: FormBuilder){
+      this.currentUser = this.sharedService.getCurrentUser();
+      this.loginForm = fb.group({
+        'username' : [null, Validators.required],
+        'password' : [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(20)])],
+        'validate' : ''
+      });
+   }
 
   signIn(provider){
     console.log("Sign In to: >>> ", provider);
@@ -33,9 +37,9 @@ export class AppComponent {
                 }
     );
   }
-  
-  handleLogin(){
-    console.log("IN handleLogin: >>> ", JSON.stringify(this.credentials));
+
+  handleLogin(post){
+    console.log("IN handleLogin: >>> ", JSON.stringify(post));
   }
 
   logout(){

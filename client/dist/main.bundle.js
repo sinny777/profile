@@ -21,7 +21,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n\n.alert {\n    background: #f2edda;\n    padding: 7px;\n    font-size: .9em;\n    margin-bottom: 20px;\n    display: inline-block;\n    -webkit-animation: 2s alertAnim forwards;\n            animation: 2s alertAnim forwards;\n}\n\n.register-text{\n  padding: 3px !important;\n}\n\n.login-btn{\n  padding: 1px !important;\n}\n\n@-webkit-keyframes alertAnim {\n    from {\n        opacity:0;\n        -webkit-transform: translateY(-20px);\n                transform: translateY(-20px);\n    }\n    to {\n        opacity:1;\n        -webkit-transform: translateY(0);\n                transform: translateY(0);\n    }\n}\n\n@keyframes alertAnim {\n    from {\n        opacity:0;\n        -webkit-transform: translateY(-20px);\n                transform: translateY(-20px);\n    }\n    to {\n        opacity:1;\n        -webkit-transform: translateY(0);\n                transform: translateY(0);\n    }\n}\n", ""]);
 
 // exports
 
@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<nav class=\"navbar navbar-primary navbar-transparent navbar-fixed-top navbar-color-on-scroll\" id=\"sectionsNav\">\n\t<div class=\"container\">\n        <div class=\"navbar-header\">\n\t\t    \t<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navigation-index\">\n\t\t        \t<span class=\"sr-only\">Toggle navigation</span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t    \t</button>\n\t    \t\t<a routerLink=\"/\">\n\t        \t<div class=\"logo-container\">\n\t                <div class=\"brand\">\n\t                    Hukam\n\t                </div>\n\t\t\t\t\t\t</div>\n\t      \t</a>\n\t    </div>\n\n\t    <div class=\"collapse navbar-collapse\" id=\"navigation-index\">\n\t    \t<ul class=\"nav navbar-nav navbar-right\">\n\t\t\t\t\t\t<li *ngIf=\"!currentUser || !currentUser.name\">\n\t\t\t\t\t\t\t\t<a href=\"#\" data-toggle=\"modal\" data-target=\"#loginModal\">\n\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">login</i> Login\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li *ngIf=\"currentUser && currentUser.name\" class=\"dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t\t\t\t\t\t\t {{currentUser.name}}\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t\t\t\t\t\t\t\t<li><a routerLink=\"/account\" >Account Settings</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/account/places\">My Places</a></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"javascript:void(0);\" (click)=\"logout();\">Logout</a></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"dropdown\">\n\t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t\t\t\t\t<i class=\"material-icons\">menu</i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">Company</li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/aboutus\">About Us</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/careers\">Careers</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/contact\">Contact Us</a></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">Services</li>\n\t\t\t\t\t\t\t\t\t\t<li><a routerLink=\"/iot/hbuddy\" >Home Automation</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/iot/industries\">Industry Solutions</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/iot/agriculture\">Smart Agriculture</a></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</li>\n\t    \t</ul>\n\t    </div>\n\t</div>\n</nav>\n<!-- End Navbar -->\n\n<!-- Login Modal -->\n<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n\t<div class=\"modal-dialog modal-login\">\n\t\t<div class=\"modal-content\">\n\t\t\t<div class=\"card card-signup card-plain\">\n\t\t\t\t<div class=\"modal-header\">\n\t\t\t\t\t<button #closeBtn type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\"><i class=\"material-icons\">clear</i></button>\n\n\t\t\t\t\t<div class=\"header header-primary text-center\">\n\t\t\t\t\t\t<h4 class=\"card-title\">Log in</h4>\n\t\t\t\t\t\t<div class=\"social-line\">\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('google');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-google-plus\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('facebook');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-facebook-square\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('linkedin');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-linkedin\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"modal-body\">\n\t\t\t\t\t<form class=\"form\" method=\"\" action=\"http://demos.creative-tim.com/material-kit-pro/index.html\">\n\t\t\t\t\t\t<p class=\"description text-center\">Or Be Classical</p>\n\t\t\t\t\t\t<div class=\"card-content\">\n\n\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">email</i>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t<div class=\"form-group is-empty\"><input type=\"text\" class=\"form-control\" placeholder=\"Email...\"><span class=\"material-input\"></span></div>\n\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">lock_outline</i>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t<div class=\"form-group is-empty\"><input type=\"password\" placeholder=\"Password...\" class=\"form-control\"><span class=\"material-input\"></span></div>\n\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t<!-- If you want to add a checkbox to this form, uncomment this code\n\n\t\t\t\t\t\t\t<div class=\"checkbox\">\n\t\t\t\t\t\t\t\t<label>\n\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" name=\"optionsCheckboxes\" checked>\n\t\t\t\t\t\t\t\t\tSubscribe to newsletter\n\t\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t\t</div> -->\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"modal-footer text-center\">\n\t\t\t\t\t<a href=\"http://demos.creative-tim.com/material-kit-pro/index.html#pablo\" class=\"btn btn-primary btn-simple btn-wd btn-lg\">Get Started</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n<!--  End Modal -->\n\n\t<!-- <app-dashboard></app-dashboard> -->\n\t<!-- <app-home></app-home> -->\n\t<router-outlet></router-outlet>\n\n<footer class=\"footer\">\n\t<div class=\"container\">\n\t\t\t<nav class=\"pull-left\">\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/\">\n\t\t\t\t\t\t\t\tHukam Technologies\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/privacy\">\n\t\t\t\t\t\t\t\tPrivacy\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/terms\">\n\t\t\t\t\t\t\t\tTerms Of Use\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t</nav>\n\t\t\t<ul class=\"social-buttons pull-center\">\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Follow us on Twitter\" data-placement=\"top\" href=\"https://twitter.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-twitter\">\n\t\t\t\t\t\t<i class=\"fa fa-twitter\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Like us on Facebook\" data-placement=\"top\" href=\"https://www.facebook.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-facebook\">\n\t\t\t\t\t\t<i class=\"fa fa-facebook-square\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Follow us on Google\" data-placement=\"top\" href=\"https://www.instagram.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-google\">\n\t\t\t\t\t\t<i class=\"fa fa-google\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Connect with us on LinkedIn\" data-placement=\"top\" href=\"https://www.linkedin.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-linkedin\">\n\t\t\t\t\t\t<i class=\"fa fa-linkedin\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<div class=\"copyright pull-right\">\n\t\t\t\t\t&copy; 2017, made with <i class=\"material-icons\">favorite</i> by Hukam Technologies.\n\t\t\t</div>\n\t</div>\n</footer>\n\n<script type=\"text/javascript\">\n\n  $().ready(function(){\n    // the body of this function is in assets/material-kit/assets/material-kit.js\n\n        materialKit.initSliders();\n        window_width = $(window).width();\n\n          if (window_width >= 992){\n            big_image = $('.wrapper > .header');\n\n            $(window).on('scroll', materialKitDemo.checkScrollForParallax);\n          }\n\n  });\n</script>\n"
+module.exports = "\n<nav class=\"navbar navbar-primary navbar-transparent navbar-fixed-top navbar-color-on-scroll\" id=\"sectionsNav\">\n\t<div class=\"container\">\n        <div class=\"navbar-header\">\n\t\t    \t<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navigation-index\">\n\t\t        \t<span class=\"sr-only\">Toggle navigation</span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t        \t<span class=\"icon-bar\"></span>\n\t\t    \t</button>\n\t    \t\t<a routerLink=\"/\">\n\t        \t<div class=\"logo-container\">\n\t                <div class=\"brand\">\n\t                    Hukam\n\t                </div>\n\t\t\t\t\t\t</div>\n\t      \t</a>\n\t    </div>\n\n\t    <div class=\"collapse navbar-collapse\" id=\"navigation-index\">\n\t    \t<ul class=\"nav navbar-nav navbar-right\">\n\t\t\t\t\t\t<li *ngIf=\"!currentUser || !currentUser.name\">\n\t\t\t\t\t\t\t\t<a href=\"#\" data-toggle=\"modal\" data-target=\"#loginModal\">\n\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">login</i> Login\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li *ngIf=\"currentUser && currentUser.name\" class=\"dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t\t\t\t\t\t\t {{currentUser.name}}\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t\t\t\t\t\t\t\t<li><a routerLink=\"/account\" >Account Settings</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/account/places\">My Places</a></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"javascript:void(0);\" (click)=\"logout();\">Logout</a></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li *ngIf=\"currentUser && currentUser.email == 'sinny777@gmail.com'\" class=\"dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t\t\t\t\t\t\tAdmin\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t\t\t\t\t\t\t\t<li><a target=\"_blank\" href=\"https://console.bluemix.net/services/iotf-service/fcff5d8e-6106-4013-b5a6-26c1de9917fa\" >IoT Platform</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a target=\"_blank\" href=\"https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html#/_all_dbs\">CloudantDB</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a target=\"_blank\" href=\"https://watson-conversation.ng.bluemix.net/us-south/9cafee8e-239f-412a-ae15-5bb338f83803/workspaces\">Conversation</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a target=\"_blank\" href=\"https://console.bluemix.net/services/Object-Storage/cc2840c0-0a4a-4e30-a58c-4fb16873bc12\">Object Storage</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a target=\"_blank\" href=\"https://console.bluemix.net/devops/pipelines/56d9538c-ef70-4c9a-b3cc-0254e653eda8?env_id=ibm:yp:us-south\">DevOps</a></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"dropdown\">\n\t\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n\t\t\t\t\t\t\t<i class=\"material-icons\">menu</i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-right\">\n\t\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">Company</li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/aboutus\">About Us</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/careers\">Careers</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/public/contact\">Contact Us</a></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">Services</li>\n\t\t\t\t\t\t\t\t\t\t<li><a routerLink=\"/iot/hbuddy\" >Home Automation</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/iot/industries\">Industry Solutions</a></li>\n\t\t\t\t\t\t\t\t\t\t<li><a href=\"/iot/agriculture\">Smart Agriculture</a></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</li>\n\t    \t</ul>\n\t    </div>\n\t</div>\n</nav>\n<!-- End Navbar -->\n\n<!-- Login Modal -->\n<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n\t<div class=\"modal-dialog modal-login\">\n\t\t<div class=\"modal-content\">\n\t\t\t<div class=\"card card-signup card-plain\">\n\t\t\t\t<div class=\"modal-header\">\n\t\t\t\t\t<button #closeBtn type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\"><i class=\"material-icons\">clear</i></button>\n\n\t\t\t\t\t<div class=\"header header-primary text-center\">\n\t\t\t\t\t\t<h4 class=\"card-title\">Log in</h4>\n\t\t\t\t\t\t<div class=\"social-line\">\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('google');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-google-plus\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('facebook');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-facebook-square\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" (click)=\"signIn('linkedin');\" class=\"btn btn-just-icon btn-simple\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-linkedin\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"modal-body\">\n\n\t\t\t\t\t\t\t\t<form class=\"form\" [formGroup]=\"loginForm\" (ngSubmit)=\"handleLogin(loginForm.value)\">\n\t\t\t\t\t\t\t\t\t<p class=\"description text-center\">Or Be Classical</p>\n\t\t\t\t\t\t\t\t\t<div class=\"card-content\">\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">email</i>\n\t\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"form-group is-empty\"><input type=\"text\" class=\"form-control\" placeholder=\"Username/Email\" formControlName=\"username\"><span class=\"material-input\"></span></div>\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">\n\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"material-icons\">lock_outline</i>\n\t\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"form-group is-empty\"><input type=\"password\" placeholder=\"Password\" formControlName=\"password\" class=\"form-control\"><span class=\"material-input\"></span></div>\n\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t<div class=\"text-center login-btn\">\n\t\t\t\t\t\t\t\t\t\t\t<input type=\"submit\" class=\"btn btn-primary btn-simple btn-wd btn-lg\" value=\"Login\" [disabled]=\"!loginForm.valid\" >\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t</form>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\"modal-footer text-center register-text\">\n\t\t\t\t\tDon't have an account ? <a href=\"javascript:void(0);\" (click)=\"gotoRegister();\" class=\"\">Click here to Register</a>\n\t\t\t\t\t<!-- <input type=\"submit\" class=\"btn btn-primary btn-simple btn-wd btn-lg\" value=\"Login\" [disabled]=\"!loginForm.valid\"> -->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n<!--  End Modal -->\n\n\t<!-- <app-dashboard></app-dashboard> -->\n\t<!-- <app-home></app-home> -->\n\t<router-outlet></router-outlet>\n\n<footer class=\"footer\">\n\t<div class=\"container\">\n\t\t\t<nav class=\"pull-left\">\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/\">\n\t\t\t\t\t\t\t\tHukam Technologies\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/privacy\">\n\t\t\t\t\t\t\t\tPrivacy\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"/terms\">\n\t\t\t\t\t\t\t\tTerms Of Use\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t</nav>\n\t\t\t<ul class=\"social-buttons pull-center\">\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Follow us on Twitter\" data-placement=\"top\" href=\"https://twitter.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-twitter\">\n\t\t\t\t\t\t<i class=\"fa fa-twitter\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Like us on Facebook\" data-placement=\"top\" href=\"https://www.facebook.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-facebook\">\n\t\t\t\t\t\t<i class=\"fa fa-facebook-square\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Follow us on Google\" data-placement=\"top\" href=\"https://www.instagram.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-google\">\n\t\t\t\t\t\t<i class=\"fa fa-google\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a rel=\"tooltip\" title=\"Connect with us on LinkedIn\" data-placement=\"top\" href=\"https://www.linkedin.com/HukamTechnologies\" target=\"_blank\" class=\"btn btn-just-icon btn-simple btn-linkedin\">\n\t\t\t\t\t\t<i class=\"fa fa-linkedin\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<div class=\"copyright pull-right\">\n\t\t\t\t\t&copy; 2017, made with <i class=\"material-icons\">favorite</i> by Hukam Technologies.\n\t\t\t</div>\n\t</div>\n</footer>\n\n<script type=\"text/javascript\">\n\n  $().ready(function(){\n    // the body of this function is in assets/material-kit/assets/material-kit.js\n\n        materialKit.initSliders();\n        window_width = $(window).width();\n\n          if (window_width >= 992){\n            big_image = $('.wrapper > .header');\n\n            $(window).on('scroll', materialKitDemo.checkScrollForParallax);\n          }\n\n  });\n</script>\n"
 
 /***/ }),
 
@@ -43,8 +43,9 @@ module.exports = "\n<nav class=\"navbar navbar-primary navbar-transparent navbar
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_social_login__ = __webpack_require__("../../../../angular2-social-login/dist/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_shared_service__ = __webpack_require__("../../../../../src/app/services/shared.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_social_login__ = __webpack_require__("../../../../angular2-social-login/dist/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_shared_service__ = __webpack_require__("../../../../../src/app/services/shared.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -58,11 +59,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = (function () {
-    function AppComponent(_auth, sharedService) {
+    function AppComponent(_auth, sharedService, fb) {
         this._auth = _auth;
         this.sharedService = sharedService;
+        this.fb = fb;
         this.currentUser = this.sharedService.getCurrentUser();
+        this.loginForm = fb.group({
+            'username': [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* Validators */].required],
+            'password': [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* Validators */].maxLength(20)])],
+            'validate': ''
+        });
     }
     AppComponent.prototype.signIn = function (provider) {
         var _this = this;
@@ -74,6 +82,9 @@ var AppComponent = (function () {
             _this.closeBtn.nativeElement.click();
         });
     };
+    AppComponent.prototype.handleLogin = function (post) {
+        console.log("IN handleLogin: >>> ", JSON.stringify(post));
+    };
     AppComponent.prototype.logout = function () {
         var _this = this;
         this._auth.logout().subscribe(function (data) {
@@ -83,7 +94,7 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('closeBtn'),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_17" /* ViewChild */])('closeBtn'),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* ElementRef */]) === "function" && _a || Object)
 ], AppComponent.prototype, "closeBtn", void 0);
 AppComponent = __decorate([
@@ -92,10 +103,10 @@ AppComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_social_login__["b" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_social_login__["b" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_shared_service__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_shared_service__["a" /* SharedService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angular2_social_login__["b" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angular2_social_login__["b" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_shared_service__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_shared_service__["a" /* SharedService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === "function" && _d || Object])
 ], AppComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -105,18 +116,19 @@ var _a, _b, _c;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_social_login__ = __webpack_require__("../../../../angular2-social-login/dist/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home_component__ = __webpack_require__("../../../../../src/app/pages/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/pages/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__agm_core__ = __webpack_require__("../../../../@agm/core/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__agm_core_services_google_maps_api_wrapper__ = __webpack_require__("../../../../@agm/core/services/google-maps-api-wrapper.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__agm_core_services_managers_marker_manager__ = __webpack_require__("../../../../@agm/core/services/managers/marker-manager.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_mqtt_service__ = __webpack_require__("../../../../../src/app/services/mqtt.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_shared_service__ = __webpack_require__("../../../../../src/app/services/shared.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_h_buddy_h_buddy_component__ = __webpack_require__("../../../../../src/app/pages/h-buddy/h-buddy.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_social_login__ = __webpack_require__("../../../../angular2-social-login/dist/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home_component__ = __webpack_require__("../../../../../src/app/pages/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/pages/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__agm_core__ = __webpack_require__("../../../../@agm/core/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__agm_core_services_google_maps_api_wrapper__ = __webpack_require__("../../../../@agm/core/services/google-maps-api-wrapper.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__agm_core_services_managers_marker_manager__ = __webpack_require__("../../../../@agm/core/services/managers/marker-manager.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_mqtt_service__ = __webpack_require__("../../../../../src/app/services/mqtt.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_shared_service__ = __webpack_require__("../../../../../src/app/services/shared.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_h_buddy_h_buddy_component__ = __webpack_require__("../../../../../src/app/pages/h-buddy/h-buddy.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -124,6 +136,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -150,9 +163,9 @@ var providers = {
     }
 };
 var appRoutes = [
-    { path: 'public/dashboard', component: __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard_component__["a" /* DashboardComponent */] },
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_5__pages_home_home_component__["a" /* HomeComponent */] },
-    { path: 'iot/hbuddy', component: __WEBPACK_IMPORTED_MODULE_12__pages_h_buddy_h_buddy_component__["a" /* HBuddyComponent */] }
+    { path: 'public/dashboard', component: __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard_component__["a" /* DashboardComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_6__pages_home_home_component__["a" /* HomeComponent */] },
+    { path: 'iot/hbuddy', component: __WEBPACK_IMPORTED_MODULE_13__pages_h_buddy_h_buddy_component__["a" /* HBuddyComponent */] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -160,27 +173,29 @@ var AppModule = (function () {
     return AppModule;
 }());
 AppModule = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["b" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard_component__["a" /* DashboardComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_h_buddy_h_buddy_component__["a" /* HBuddyComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__pages_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_h_buddy_h_buddy_component__["a" /* HBuddyComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* RouterModule */].forRoot(appRoutes),
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */].forRoot(appRoutes),
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_3_angular2_social_login__["a" /* Angular2SocialLoginModule */],
-            __WEBPACK_IMPORTED_MODULE_7__agm_core__["a" /* AgmCoreModule */].forRoot({
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* ReactiveFormsModule */],
+            __WEBPACK_IMPORTED_MODULE_4_angular2_social_login__["a" /* Angular2SocialLoginModule */],
+            __WEBPACK_IMPORTED_MODULE_8__agm_core__["a" /* AgmCoreModule */].forRoot({
                 apiKey: 'AIzaSyD3oMSe59cIpUnouvFcWT3oP3iPwsRp5zk'
             })
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_8__agm_core_services_google_maps_api_wrapper__["a" /* GoogleMapsAPIWrapper */], __WEBPACK_IMPORTED_MODULE_9__agm_core_services_managers_marker_manager__["a" /* MarkerManager */], __WEBPACK_IMPORTED_MODULE_10__services_mqtt_service__["a" /* MqttService */], __WEBPACK_IMPORTED_MODULE_11__services_shared_service__["a" /* SharedService */]],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_9__agm_core_services_google_maps_api_wrapper__["a" /* GoogleMapsAPIWrapper */], __WEBPACK_IMPORTED_MODULE_10__agm_core_services_managers_marker_manager__["a" /* MarkerManager */], __WEBPACK_IMPORTED_MODULE_11__services_mqtt_service__["a" /* MqttService */], __WEBPACK_IMPORTED_MODULE_12__services_shared_service__["a" /* SharedService */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
-__WEBPACK_IMPORTED_MODULE_3_angular2_social_login__["a" /* Angular2SocialLoginModule */].loadProvidersScripts(providers);
+__WEBPACK_IMPORTED_MODULE_4_angular2_social_login__["a" /* Angular2SocialLoginModule */].loadProvidersScripts(providers);
 //# sourceMappingURL=app.module.js.map
 
 /***/ }),

@@ -43,6 +43,7 @@
 										<li><a target="_blank" href="https://console.bluemix.net/services/iotf-service/fcff5d8e-6106-4013-b5a6-26c1de9917fa" >IoT Platform</a></li>
 										<li><a target="_blank" href="https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html#/_all_dbs">CloudantDB</a></li>
 										<li><a target="_blank" href="https://watson-conversation.ng.bluemix.net/us-south/9cafee8e-239f-412a-ae15-5bb338f83803/workspaces">Conversation</a></li>
+										<li><a target="_blank" href="https://console.bluemix.net/services/Object-Storage/cc2840c0-0a4a-4e30-a58c-4fb16873bc12">Object Storage</a></li>
 										<li><a target="_blank" href="https://console.bluemix.net/devops/pipelines/56d9538c-ef70-4c9a-b3cc-0254e653eda8?env_id=ibm:yp:us-south">DevOps</a></li>
 								</ul>
 						</li>
@@ -92,37 +93,37 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form class="form" method="post" action="">
-						<p class="description text-center">Or Be Classical</p>
-						<div class="card-content">
 
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="material-icons">email</i>
-								</span>
-								<div class="form-group is-empty"><input type="text" class="form-control" placeholder="Username" [(ngModel)]="credentials.email"><span class="material-input"></span></div>
-							</div>
+								<form class="form" [formGroup]="loginForm" (ngSubmit)="handleLogin(loginForm.value)">
+									<p class="description text-center">Or Be Classical</p>
+									<div class="card-content">
 
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="material-icons">lock_outline</i>
-								</span>
-								<div class="form-group is-empty"><input type="password" placeholder="Password" [(ngModel)]="credentials.password" class="form-control"><span class="material-input"></span></div>
-							</div>
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">email</i>
+											</span>
+											<div class="form-group is-empty"><input type="text" class="form-control" placeholder="Username/Email" formControlName="username"><span class="material-input"></span></div>
+										</div>
 
-							<!-- If you want to add a checkbox to this form, uncomment this code
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">lock_outline</i>
+											</span>
+											<div class="form-group is-empty"><input type="password" placeholder="Password" formControlName="password" class="form-control"><span class="material-input"></span></div>
+										</div>
 
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" name="optionsCheckboxes" checked>
-									Subscribe to newsletter
-								</label>
-							</div> -->
-						</div>
-					</form>
+									</div>
+
+									<div class="text-center login-btn">
+											<input type="submit" class="btn btn-primary btn-simple btn-wd btn-lg" value="Login" [disabled]="!loginForm.valid" >
+									</div>
+
+								</form>
+
 				</div>
-				<div class="modal-footer text-center">
-					<a href="javascript:void(0);" (click)="handleLogin();" class="btn btn-primary btn-simple btn-wd btn-lg">Login</a>
+				<div class="modal-footer text-center register-text">
+					Don't have an account ? <a href="javascript:void(0);" (click)="gotoRegister();" class="">Click here to Register</a>
+					<!-- <input type="submit" class="btn btn-primary btn-simple btn-wd btn-lg" value="Login" [disabled]="!loginForm.valid"> -->
 				</div>
 			</div>
 		</div>
