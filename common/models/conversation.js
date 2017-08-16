@@ -2,9 +2,6 @@
 
 module.exports = function(Conversation) {
 	
-	var CONFIG = require('../config/config').get(),
-	watson = require('watson-developer-cloud');
-
 	Conversation.remoteMethod('doconversation', {
 		    	accepts: [
 		            { arg: 'req', type: 'object', http: function(ctx) {

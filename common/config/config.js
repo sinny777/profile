@@ -36,13 +36,13 @@ module.exports.get = function() {
 				"conversation":{
 					"credentials":{
 						"url": "https://gateway.watsonplatform.net/conversation/api",
-						"password": "Dd6zArf1tY05",
-						"username": "7374796d-9f99-4e50-92f4-b4c5f5ce7e59",
+						"password": "5vr8NeNBQnli",
+						"username": "2a071897-6991-47d4-87f2-fda6d2d9c021",
 						"version_date": "2016-09-20",
 						"version": "v1-experimental",
 						"silent": true
 					},
-					"workspace_id": "ccc639e8-9b25-4226-8611-1f4386000344"
+					"workspace_id": "54a0fc6a-45e2-42a6-a68d-b09cd6d99db5"
 				},
 				"alchemy": {
 					  "url": "https://gateway-a.watsonplatform.net/calls",
