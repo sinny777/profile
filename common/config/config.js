@@ -1,5 +1,5 @@
 /**
- * LOCAL Server Configuration
+ * PRODUCTION Server Configuration
  */
 'use strict';
 
