@@ -1,12 +1,9 @@
 applications:
 - services:
-  - granslive-cloudantDB
-  - hukam-conversation
-  - hukam-iotplatform
-  - hukam-objectstorage
-  - hukam-stt
-  - hukam-tts
-  name: granslive-web
+  - hukam-cloudant-dev
+  - hukam-iot-dev
+  - hukam-conversation-dev
+  name: hbuddy-dev
   command: node .
   path: .
   memory: 512M
