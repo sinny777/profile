@@ -41,9 +41,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-nodemon');
 
-    grunt.registerTask('local', ['bower:install', 'copy:local']);
-    grunt.registerTask('office', ['bower:install', 'copy:office']);
-    grunt.registerTask('production', ['bower:install', 'copy:production']);
+    grunt.registerTask('local', ['copy:local']);
+    grunt.registerTask('office', ['copy:office']);
+    grunt.registerTask('production', ['copy:production']);
 
     grunt.registerTask('start', ['nodemon']);
 
