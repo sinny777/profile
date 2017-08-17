@@ -81,6 +81,11 @@ var methods = {};
 				});
 			}
 			
+			if(next_action && next_action == "continue"){
+					cb(err, response);
+					respSent = true;
+			}
+			
 			/*
 			if(!respSent){
 				cb(err, response);

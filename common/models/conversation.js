@@ -13,7 +13,7 @@ module.exports = function(Conversation) {
 	});
 	
 	Conversation.doconversation = function(req, cb) {
-		console.log("In Conversation.doconversation : >>>> ", req.body);
+		console.log("\n\nIn Conversation.doconversation : >>>> ", req.body);
 		var conversationHandler = require('../../server/handlers/conversationHandler')(Conversation.app);
 		var reqPayload = req.body;
 		conversationHandler.callConversation(reqPayload, function(err, resp){
