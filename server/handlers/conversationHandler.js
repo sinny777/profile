@@ -39,59 +39,59 @@ var methods = {};
 			&& conversationResp.intents[0].intent == 'appliance_action'){
 			handleApplianceAction(response, function(err, resp){
 				cb(err, resp);
-				respSent = true;
+				return false;
 			});
 		}else if (conversationResp.context){
 			var next_action = conversationResp.context.next_action;
-			var respSent = false;
 			if(!next_action){
 				cb(err, response);
+				return false;
 			}
 			
 			if(next_action && next_action == "weather_service"){
 				getWeather(response, function(err, response){
 					cb(err, response);
-					respSent = true;
+					return false;
 				});
 			}
 			
 			if(next_action && next_action == "news_service"){
 				getNewsFeeds(response, function(err, response){
 					cb(err, response);
-					respSent = true;
+					return false;
 				});
 			}
 			
 			if(next_action && next_action == "google_search"){
 				searchGoogle(response, function(err, response){
 					cb(err, response);
-					respSent = true;
+					return false;
 				});
 			}
 			
 			if(next_action && next_action == "date_time"){
 				cb(err, response);
-				respSent = true;
+				return false;
 			}
 			
 			if(next_action && next_action == "joke"){
 				getRandomJoke(response, function(err, response){
 					cb(err, response);
-					respSent = true;
+					return false;
 				});
 			}
 			
 			if(next_action && next_action == "continue"){
 					cb(err, response);
-					respSent = true;
+					return false;
 			}
 			
 			if(next_action && next_action == "completed"){
 				cb(err, response);
-				respSent = true;
+				return false;
 			}else{
 				cb(err, response);
-				respSent = true;
+				return false;
 			}
 			
 			/*
