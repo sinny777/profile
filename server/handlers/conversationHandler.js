@@ -48,57 +48,40 @@ var methods = {};
 				return false;
 			}
 			
-			if(next_action && next_action == "weather_service"){
-				getWeather(response, function(err, response){
-					cb(err, response);
-					return false;
-				});
+			switch(next_action) {
+			    case "weather_service":
+			    	getWeather(response, function(err, response){
+						cb(err, response);
+					});
+			        break;
+			    case "news_service":
+			    	getNewsFeeds(response, function(err, response){
+						cb(err, response);
+					});
+			        break;
+			    case "google_search":
+			    	searchGoogle(response, function(err, response){
+						cb(err, response);
+					});
+			        break;
+			    case "date_time":
+			    	cb(err, response);
+			        break;
+			    case "joke":
+			    	getRandomJoke(response, function(err, response){
+						cb(err, response);
+						return false;
+					});
+			        break;
+			    case "continue":
+			    	cb(err, response);
+			        break;
+			    case "completed":
+			    	cb(err, response);
+			        break;
+			    default:
+			    	cb(err, response);
 			}
-			
-			if(next_action && next_action == "news_service"){
-				getNewsFeeds(response, function(err, response){
-					cb(err, response);
-					return false;
-				});
-			}
-			
-			if(next_action && next_action == "google_search"){
-				searchGoogle(response, function(err, response){
-					cb(err, response);
-					return false;
-				});
-			}
-			
-			if(next_action && next_action == "date_time"){
-				cb(err, response);
-				return false;
-			}
-			
-			if(next_action && next_action == "joke"){
-				getRandomJoke(response, function(err, response){
-					cb(err, response);
-					return false;
-				});
-			}
-			
-			if(next_action && next_action == "continue"){
-					cb(err, response);
-					return false;
-			}
-			
-			if(next_action && next_action == "completed"){
-				cb(err, response);
-				return false;
-			}else{
-				cb(err, response);
-				return false;
-			}
-			
-			/*
-			if(!respSent){
-				cb(err, response);
-			}
-			*/
 			
 		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
 				cb(err, response);
@@ -178,8 +161,16 @@ var methods = {};
 	};
 	
 	function getWeather(response, cb) {
-	    console.log('fetching weather');
-	    var url =  "https://query.yahooapis.com/v1/public/yql?q=select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='New Delhi, IN')&format=json";
+		var location = response.conversationResp.context.location;
+		if(!location){
+			response.conversationResp.output = {
+        			text: ["Please tell me the location"]
+        	};
+            cb(null, response);
+            return false;
+		}
+	    console.log('fetching weather data for ', location);
+	    var url =  "https://query.yahooapis.com/v1/public/yql?q=select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+location+"')&format=json";
 	    request({
 	        url: url,
 	        json: true
@@ -194,8 +185,8 @@ var methods = {};
 	        	var weather = body.query.results.channel.item.condition;
 	        	
 	        	var temperature = Number((weather.temp - 32) * 5/9).toFixed(2); 
-	        	
-	        	var respText = format('The current weather conditions are %s degrees and %s.', temperature, weather.text);
+	        	if(location)
+	        	var respText = format('The current weather conditions in %s are %s degrees and %s.', location, temperature, weather.text);
 	        	response.conversationResp.output = {
 	        			text: [respText]
 	        	};
