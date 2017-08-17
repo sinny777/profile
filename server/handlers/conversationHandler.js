@@ -86,6 +86,14 @@ var methods = {};
 					respSent = true;
 			}
 			
+			if(next_action && next_action == "completed"){
+				cb(err, response);
+				respSent = true;
+			}else{
+				cb(err, response);
+				respSent = true;
+			}
+			
 			/*
 			if(!respSent){
 				cb(err, response);
