@@ -27,7 +27,7 @@ var methods = {};
 		reqPayload.params.intents = [];
 		reqPayload.params.output = {};
         conversation_service.message(reqPayload.params, function(err, conversationResp) {
-        	console.log("<<<<<<<< CONVERSATION API RESPONSE :>>>>>>>>>>>> ", JSON.stringify(conversationResp));
+//        	console.log("<<<<<<<< CONVERSATION API RESPONSE :>>>>>>>>>>>> ", JSON.stringify(conversationResp));
             handleConversationResponse(err, conversationResp, cb);
         });
 	};

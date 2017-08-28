@@ -1,22 +1,33 @@
 {
   "initial:before": {
-	  "loopback#favicon": {
-	    	"params": "$!../client/dist/favicon.ico"
-	    }
+    "loopback#favicon": {
+      "params": "$!../client/dist/favicon.ico"
+    }
   },
   "initial": {
-	    "compression": {},
-	    "loopback-context#per-request": {},
-	    "cors": {
-	      "params": {
-	        "origin": true,
-	        "credentials": true,
-	        "maxAge": 86400
-	      }
-	    }
-	  },
+    "compression": {},
+    "loopback-context#per-request": {},
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    }
+  },
+  "session": {},
+  "auth": {},
+  "parse": {},
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
   "files": {
     "loopback#static": {
+      "paths": "/",
       "params": "$!../client/dist"
     }
   },
@@ -24,10 +35,11 @@
     "loopback#urlNotFound": {}
   },
   "final:after": {
-    "loopback#errorHandler": {
-    	"params": {
-            "includeStack": false
-          }
+    "strong-error-handler": {
+      "params": {
+         "debug": false,
+         "log": true
+       }
     }
   }
 }
