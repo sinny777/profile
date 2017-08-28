@@ -125,7 +125,7 @@ app.start = function() {
 	});
 
 //The ultimate error handler.
-app.use(loopback.errorHandler());
+// app.use(loopback.errorHandler());
 
 //Bootstrap the application, configure models, datasources and middleware.
 //Sub-apps like REST API are mounted via boot scripts.

@@ -44,32 +44,33 @@ var methods = {};
 		}else if (conversationResp.context){
 			var next_action = conversationResp.context.next_action;
 			if(!next_action){
+				console.log("No next_action found in Conversation response context !! ");
 				cb(err, response);
 				return false;
 			}
 			
 			switch(next_action) {
 			    case "weather_service":
-			    	getWeather(response, function(err, response){
-						cb(err, response);
+			    	getWeather(response, function(err, resp){
+						cb(err, resp);
 					});
 			        break;
 			    case "news_service":
-			    	getNewsFeeds(response, function(err, response){
-						cb(err, response);
+			    	getNewsFeeds(response, function(err, resp){
+						cb(err, resp);
 					});
 			        break;
 			    case "google_search":
-			    	searchGoogle(response, function(err, response){
-						cb(err, response);
+			    	searchGoogle(response, function(err, resp){
+						cb(err, resp);
 					});
 			        break;
 			    case "date_time":
 			    	cb(err, response);
 			        break;
 			    case "joke":
-			    	getRandomJoke(response, function(err, response){
-						cb(err, response);
+			    	getRandomJoke(response, function(err, resp){
+						cb(err, resp);
 						return false;
 					});
 			        break;
