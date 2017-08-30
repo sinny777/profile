@@ -16,12 +16,10 @@ var passportConfigurator = new PassportConfigurator(app);
  app.use(serveStatic(__dirname + '/client/dist'));
  app.use('/api', loopback.rest());
 
- // app.get('/home', serveStatic(__dirname + '/client/dist'));
-
-var ignoredPaths = ['/api', '/explorer', '/status'];
+var ignoredPaths = ['/api/', '/explorer', '/status'];
 app.all('/*', function(req, res, next) {
-  if(!startsWith(req.url, ignoredPaths)){
-    if(req.url == '/' || startsWith(req.url, ['/public', '/iot', '/account'])){
+  if(!includes(req.originalUrl, ignoredPaths)){
+    if(req.url == '/' || includes(req.originalUrl, ['/public', '/iot', '/account'])){
         res.sendFile('index.html', { root: path.resolve(__dirname, '..', 'client/dist') });
     }else{
         res.sendFile(path.resolve(req.url), { root: path.resolve(__dirname, '..', 'client/dist') });
@@ -31,14 +29,13 @@ app.all('/*', function(req, res, next) {
   }
 });
 
-
-function startsWith(string, array) {
+function includes(string, array) {
   for(i = 0; i < array.length; i++)
-    if(string.startsWith(array[i]))
+    if(string.includes(array[i])){
       return true;
+    }
   return false;
 }
-
 
 var bodyParser = require('body-parser');
 app.middleware('parse', bodyParser.json({limit: 1024*1024*50, type:'application/json'}));
