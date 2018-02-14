@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { Angular2SocialLoginModule } from "angular2-social-login";
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { MarkerManager } from '@agm/core/services/managers/marker-manager';
 import { DisqusModule } from "ngx-disqus";
+import { ShareModule } from '@ngx-share/core';
 import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
 
@@ -45,6 +47,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     Angular2SocialLoginModule,
     DisqusModule.forRoot('gurvinder'),
+    HttpClientModule,      // (Required) for share counts
+    HttpClientJsonpModule, // (Optional) For linkedIn & Tumblr counts
+    ShareModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD3oMSe59cIpUnouvFcWT3oP3iPwsRp5zk'
     })

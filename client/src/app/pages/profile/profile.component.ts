@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
+import { ShareButtons } from '@ngx-share/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   disqusConfig: any;
 
-  constructor(public sharedService: SharedService) {
+  constructor(public sharedService: SharedService, public share: ShareButtons) {
     this.disqusConfig = {
                     "pageIdentifier": "GurvinderProfile",
                     "pageUrl": "https://all-about-gurvinder.mybluemix.net"
