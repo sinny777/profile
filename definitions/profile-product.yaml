@@ -1,13 +1,13 @@
 product: '1.0.0'
 
 info:
-  name: hukam-web
-  title: hukam-web
-  version: 1.0.0
+  name: profile
+  title: profile
+  version: '1.0.0'
 
 apis:
-  'hukam-web':
-    $ref: hukam-web.yaml
+  'profile':
+    $ref: profile.yaml
 
 visibility:
   view:

@@ -1,4 +1,3 @@
-# hBuddy
+# Profile
 
-## Hukam IoT Buddy
-
+## Profile - Gurvinder Singh 

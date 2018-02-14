@@ -1,3 +1,53 @@
+swagger: '2.0'
+
+info:
+  x-ibm-name: profile
+  version: 1.0.0
+  title: profile
+
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /api
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+securityDefinitions:
+ clientIdHeader:
+   type: apiKey
+   in: header
+   name: X-IBM-Client-Id
+ clientSecretHeader:
+   in: "header"
+   name: "X-IBM-Client-Secret"
+   type: "apiKey"
+
+
+security:
+ -
+   clientIdHeader: []
+   clientSecretHeader: []
+
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)
+
 paths:
   '/userCredentials/{id}/user':
     get:
@@ -42,11 +92,11 @@ paths:
           schema:
             $ref: '#/definitions/userCredential'
       deprecated: false
-    put:
+    patch:
       tags:
         - userCredential
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: userCredential.upsert__put_userCredentials
+      operationId: userCredential.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -61,11 +111,11 @@ paths:
           schema:
             $ref: '#/definitions/userCredential'
       deprecated: false
-    patch:
+    put:
       tags:
         - userCredential
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: userCredential.upsert__patch_userCredentials
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: userCredential.replaceOrCreate__put_userCredentials
       parameters:
         - name: data
           in: body
@@ -105,7 +155,7 @@ paths:
       tags:
         - userCredential
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: userCredential.replaceOrCreate
+      operationId: userCredential.replaceOrCreate__post_userCredentials_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -214,6 +264,31 @@ paths:
           schema:
             $ref: '#/definitions/userCredential'
       deprecated: false
+    put:
+      tags:
+        - userCredential
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'userCredential.replaceById__put_userCredentials_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/userCredential'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userCredential'
+      deprecated: false
     delete:
       tags:
         - userCredential
@@ -232,36 +307,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - userCredential
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'userCredential.prototype.updateAttributes__put_userCredentials_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/userCredential'
-        - name: id
-          in: path
-          description: userCredential id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/userCredential'
-      deprecated: false
     patch:
       tags:
         - userCredential
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'userCredential.prototype.updateAttributes__patch_userCredentials_{id}'
+      operationId: userCredential.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -287,7 +337,7 @@ paths:
       tags:
         - userCredential
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: userCredential.replaceById
+      operationId: 'userCredential.replaceById__post_userCredentials_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -425,11 +475,11 @@ paths:
           schema:
             $ref: '#/definitions/userIdentity'
       deprecated: false
-    put:
+    patch:
       tags:
         - userIdentity
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: userIdentity.upsert__put_userIdentities
+      operationId: userIdentity.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -444,11 +494,11 @@ paths:
           schema:
             $ref: '#/definitions/userIdentity'
       deprecated: false
-    patch:
+    put:
       tags:
         - userIdentity
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: userIdentity.upsert__patch_userIdentities
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: userIdentity.replaceOrCreate__put_userIdentities
       parameters:
         - name: data
           in: body
@@ -488,7 +538,7 @@ paths:
       tags:
         - userIdentity
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: userIdentity.replaceOrCreate
+      operationId: userIdentity.replaceOrCreate__post_userIdentities_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -597,6 +647,31 @@ paths:
           schema:
             $ref: '#/definitions/userIdentity'
       deprecated: false
+    put:
+      tags:
+        - userIdentity
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'userIdentity.replaceById__put_userIdentities_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/userIdentity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/userIdentity'
+      deprecated: false
     delete:
       tags:
         - userIdentity
@@ -615,36 +690,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - userIdentity
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'userIdentity.prototype.updateAttributes__put_userIdentities_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/userIdentity'
-        - name: id
-          in: path
-          description: userIdentity id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/userIdentity'
-      deprecated: false
     patch:
       tags:
         - userIdentity
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'userIdentity.prototype.updateAttributes__patch_userIdentities_{id}'
+      operationId: userIdentity.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -670,7 +720,7 @@ paths:
       tags:
         - userIdentity
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: userIdentity.replaceById
+      operationId: 'userIdentity.replaceById__post_userIdentities_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -808,11 +858,11 @@ paths:
           schema:
             $ref: '#/definitions/AccessToken'
       deprecated: false
-    put:
+    patch:
       tags:
         - AccessToken
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: AccessToken.upsert__put_AccessTokens
+      operationId: AccessToken.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -827,11 +877,11 @@ paths:
           schema:
             $ref: '#/definitions/AccessToken'
       deprecated: false
-    patch:
+    put:
       tags:
         - AccessToken
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: AccessToken.upsert__patch_AccessTokens
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: AccessToken.replaceOrCreate__put_AccessTokens
       parameters:
         - name: data
           in: body
@@ -871,7 +921,7 @@ paths:
       tags:
         - AccessToken
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: AccessToken.replaceOrCreate
+      operationId: AccessToken.replaceOrCreate__post_AccessTokens_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -980,6 +1030,31 @@ paths:
           schema:
             $ref: '#/definitions/AccessToken'
       deprecated: false
+    put:
+      tags:
+        - AccessToken
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'AccessToken.replaceById__put_AccessTokens_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/AccessToken'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/AccessToken'
+      deprecated: false
     delete:
       tags:
         - AccessToken
@@ -998,36 +1073,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - AccessToken
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'AccessToken.prototype.updateAttributes__put_AccessTokens_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/AccessToken'
-        - name: id
-          in: path
-          description: AccessToken id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/AccessToken'
-      deprecated: false
     patch:
       tags:
         - AccessToken
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'AccessToken.prototype.updateAttributes__patch_AccessTokens_{id}'
+      operationId: AccessToken.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -1053,7 +1103,7 @@ paths:
       tags:
         - AccessToken
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: AccessToken.replaceById
+      operationId: 'AccessToken.replaceById__post_AccessTokens_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -1168,11 +1218,11 @@ paths:
           schema:
             $ref: '#/definitions/ACL'
       deprecated: false
-    put:
+    patch:
       tags:
         - ACL
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: ACL.upsert__put_ACLs
+      operationId: ACL.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -1187,11 +1237,11 @@ paths:
           schema:
             $ref: '#/definitions/ACL'
       deprecated: false
-    patch:
+    put:
       tags:
         - ACL
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: ACL.upsert__patch_ACLs
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: ACL.replaceOrCreate__put_ACLs
       parameters:
         - name: data
           in: body
@@ -1231,7 +1281,7 @@ paths:
       tags:
         - ACL
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: ACL.replaceOrCreate
+      operationId: ACL.replaceOrCreate__post_ACLs_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -1340,6 +1390,31 @@ paths:
           schema:
             $ref: '#/definitions/ACL'
       deprecated: false
+    put:
+      tags:
+        - ACL
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'ACL.replaceById__put_ACLs_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/ACL'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/ACL'
+      deprecated: false
     delete:
       tags:
         - ACL
@@ -1358,36 +1433,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - ACL
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'ACL.prototype.updateAttributes__put_ACLs_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/ACL'
-        - name: id
-          in: path
-          description: ACL id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/ACL'
-      deprecated: false
     patch:
       tags:
         - ACL
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'ACL.prototype.updateAttributes__patch_ACLs_{id}'
+      operationId: ACL.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -1413,7 +1463,7 @@ paths:
       tags:
         - ACL
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: ACL.replaceById
+      operationId: 'ACL.replaceById__post_ACLs_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -1551,11 +1601,11 @@ paths:
           schema:
             $ref: '#/definitions/RoleMapping'
       deprecated: false
-    put:
+    patch:
       tags:
         - RoleMapping
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: RoleMapping.upsert__put_RoleMappings
+      operationId: RoleMapping.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -1570,11 +1620,11 @@ paths:
           schema:
             $ref: '#/definitions/RoleMapping'
       deprecated: false
-    patch:
+    put:
       tags:
         - RoleMapping
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: RoleMapping.upsert__patch_RoleMappings
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: RoleMapping.replaceOrCreate__put_RoleMappings
       parameters:
         - name: data
           in: body
@@ -1614,7 +1664,7 @@ paths:
       tags:
         - RoleMapping
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: RoleMapping.replaceOrCreate
+      operationId: RoleMapping.replaceOrCreate__post_RoleMappings_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -1723,6 +1773,31 @@ paths:
           schema:
             $ref: '#/definitions/RoleMapping'
       deprecated: false
+    put:
+      tags:
+        - RoleMapping
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'RoleMapping.replaceById__put_RoleMappings_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/RoleMapping'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RoleMapping'
+      deprecated: false
     delete:
       tags:
         - RoleMapping
@@ -1741,36 +1816,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - RoleMapping
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'RoleMapping.prototype.updateAttributes__put_RoleMappings_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/RoleMapping'
-        - name: id
-          in: path
-          description: RoleMapping id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/RoleMapping'
-      deprecated: false
     patch:
       tags:
         - RoleMapping
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'RoleMapping.prototype.updateAttributes__patch_RoleMappings_{id}'
+      operationId: RoleMapping.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -1796,7 +1846,7 @@ paths:
       tags:
         - RoleMapping
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: RoleMapping.replaceById
+      operationId: 'RoleMapping.replaceById__post_RoleMappings_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -2081,11 +2131,11 @@ paths:
           schema:
             $ref: '#/definitions/Role'
       deprecated: false
-    put:
+    patch:
       tags:
         - Role
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Role.upsert__put_Roles
+      operationId: Role.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -2100,11 +2150,11 @@ paths:
           schema:
             $ref: '#/definitions/Role'
       deprecated: false
-    patch:
+    put:
       tags:
         - Role
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Role.upsert__patch_Roles
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: Role.replaceOrCreate__put_Roles
       parameters:
         - name: data
           in: body
@@ -2144,7 +2194,7 @@ paths:
       tags:
         - Role
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Role.replaceOrCreate
+      operationId: Role.replaceOrCreate__post_Roles_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -2253,6 +2303,31 @@ paths:
           schema:
             $ref: '#/definitions/Role'
       deprecated: false
+    put:
+      tags:
+        - Role
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'Role.replaceById__put_Roles_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Role'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Role'
+      deprecated: false
     delete:
       tags:
         - Role
@@ -2271,36 +2346,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - Role
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Role.prototype.updateAttributes__put_Roles_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Role'
-        - name: id
-          in: path
-          description: Role id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Role'
-      deprecated: false
     patch:
       tags:
         - Role
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Role.prototype.updateAttributes__patch_Roles_{id}'
+      operationId: Role.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -2326,7 +2376,7 @@ paths:
       tags:
         - Role
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Role.replaceById
+      operationId: 'Role.replaceById__post_Roles_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -3112,11 +3162,11 @@ paths:
           schema:
             $ref: '#/definitions/MyUser'
       deprecated: false
-    put:
+    patch:
       tags:
         - MyUser
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: MyUser.upsert__put_MyUsers
+      operationId: MyUser.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -3131,11 +3181,11 @@ paths:
           schema:
             $ref: '#/definitions/MyUser'
       deprecated: false
-    patch:
+    put:
       tags:
         - MyUser
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: MyUser.upsert__patch_MyUsers
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: MyUser.replaceOrCreate__put_MyUsers
       parameters:
         - name: data
           in: body
@@ -3175,7 +3225,7 @@ paths:
       tags:
         - MyUser
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: MyUser.replaceOrCreate
+      operationId: MyUser.replaceOrCreate__post_MyUsers_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -3284,6 +3334,31 @@ paths:
           schema:
             $ref: '#/definitions/MyUser'
       deprecated: false
+    put:
+      tags:
+        - MyUser
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'MyUser.replaceById__put_MyUsers_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/MyUser'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MyUser'
+      deprecated: false
     delete:
       tags:
         - MyUser
@@ -3302,36 +3377,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - MyUser
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'MyUser.prototype.updateAttributes__put_MyUsers_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/MyUser'
-        - name: id
-          in: path
-          description: MyUser id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
     patch:
       tags:
         - MyUser
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'MyUser.prototype.updateAttributes__patch_MyUsers_{id}'
+      operationId: MyUser.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -3357,7 +3407,7 @@ paths:
       tags:
         - MyUser
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: MyUser.replaceById
+      operationId: 'MyUser.replaceById__post_MyUsers_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -3505,11 +3555,28 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
+  '/MyUsers/{id}/verify':
+    post:
+      tags:
+        - MyUser
+      summary: "Trigger user's identity verification with configured verifyOptions"
+      operationId: MyUser.prototype.verify
+      parameters:
+        - name: id
+          in: path
+          description: MyUser id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
   /MyUsers/confirm:
     get:
       tags:
         - MyUser
-      summary: Confirm a user registration with email verification token.
+      summary: Confirm a user registration with identity verification token.
       operationId: MyUser.confirm
       parameters:
         - name: uid
@@ -3544,6 +3611,40 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
+  /MyUsers/change-password:
+    post:
+      tags:
+        - MyUser
+      summary: "Change a user's password."
+      operationId: MyUser.changePassword
+      parameters:
+        - name: oldPassword
+          in: formData
+          required: true
+          type: string
+        - name: newPassword
+          in: formData
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  /MyUsers/reset-password:
+    post:
+      tags:
+        - MyUser
+      summary: "Reset user's password via a password-reset token."
+      operationId: MyUser.setPassword
+      parameters:
+        - name: newPassword
+          in: formData
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
   /MyUsers/authenticate:
     get:
       tags:
@@ -3558,1735 +3659,6 @@ paths:
             properties:
               user:
                 type: object
-      deprecated: false
-  '/Places/{id}/owner':
-    get:
-      tags:
-        - Place
-      summary: Fetches belongsTo relation owner.
-      operationId: Place.prototype.__get__owner
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
-  '/Places/{id}/groups/{fk}':
-    get:
-      tags:
-        - Place
-      summary: Find a related item by id for groups.
-      operationId: Place.prototype.__findById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    delete:
-      tags:
-        - Place
-      summary: Delete a related item by id for groups.
-      operationId: Place.prototype.__destroyById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - Place
-      summary: Update a related item by id for groups.
-      operationId: Place.prototype.__updateById__groups
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for groups
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  '/Places/{id}/groups':
-    get:
-      tags:
-        - Place
-      summary: Queries groups of Place.
-      operationId: Place.prototype.__get__groups
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Group'
-      deprecated: false
-    post:
-      tags:
-        - Place
-      summary: Creates a new instance in groups of this model.
-      operationId: Place.prototype.__create__groups
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    delete:
-      tags:
-        - Place
-      summary: Deletes all groups of this model.
-      operationId: Place.prototype.__delete__groups
-      parameters:
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Places/{id}/groups/count':
-    get:
-      tags:
-        - Place
-      summary: Counts groups of Place.
-      operationId: Place.prototype.__count__groups
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
-  /Places:
-    post:
-      tags:
-        - Place
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Place.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-    put:
-      tags:
-        - Place
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Place.upsert__put_Places
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-    patch:
-      tags:
-        - Place
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Place.upsert__patch_Places
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-    get:
-      tags:
-        - Place
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Place.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Place'
-      deprecated: false
-  /Places/replaceOrCreate:
-    post:
-      tags:
-        - Place
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Place.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  /Places/upsertWithWhere:
-    post:
-      tags:
-        - Place
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Place.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  '/Places/{id}/exists':
-    get:
-      tags:
-        - Place
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Place.exists__get_Places_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Places/{id}':
-    head:
-      tags:
-        - Place
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Place.exists__head_Places_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Place
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Place.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-    delete:
-      tags:
-        - Place
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Place.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Place
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Place.prototype.updateAttributes__put_Places_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Place'
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-    patch:
-      tags:
-        - Place
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Place.prototype.updateAttributes__patch_Places_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Place'
-        - name: id
-          in: path
-          description: Place id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  '/Places/{id}/replace':
-    post:
-      tags:
-        - Place
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Place.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  /Places/findOne:
-    get:
-      tags:
-        - Place
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Place.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  /Places/update:
-    post:
-      tags:
-        - Place
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Place.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Place'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Places/count:
-    get:
-      tags:
-        - Place
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Place.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
-  /Places/sensordata:
-    post:
-      tags:
-        - Place
-      operationId: Place.sensorData
-      parameters: []
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              sensordata:
-                type: object
-      deprecated: false
-  /PlaceAreas:
-    post:
-      tags:
-        - PlaceArea
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: PlaceArea.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-    put:
-      tags:
-        - PlaceArea
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: PlaceArea.upsert__put_PlaceAreas
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-    patch:
-      tags:
-        - PlaceArea
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: PlaceArea.upsert__patch_PlaceAreas
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-    get:
-      tags:
-        - PlaceArea
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: PlaceArea.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  /PlaceAreas/replaceOrCreate:
-    post:
-      tags:
-        - PlaceArea
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: PlaceArea.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  /PlaceAreas/upsertWithWhere:
-    post:
-      tags:
-        - PlaceArea
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: PlaceArea.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  '/PlaceAreas/{id}/exists':
-    get:
-      tags:
-        - PlaceArea
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'PlaceArea.exists__get_PlaceAreas_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/PlaceAreas/{id}':
-    head:
-      tags:
-        - PlaceArea
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'PlaceArea.exists__head_PlaceAreas_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - PlaceArea
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: PlaceArea.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-    delete:
-      tags:
-        - PlaceArea
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: PlaceArea.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - PlaceArea
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'PlaceArea.prototype.updateAttributes__put_PlaceAreas_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/PlaceArea'
-        - name: id
-          in: path
-          description: PlaceArea id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-    patch:
-      tags:
-        - PlaceArea
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'PlaceArea.prototype.updateAttributes__patch_PlaceAreas_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/PlaceArea'
-        - name: id
-          in: path
-          description: PlaceArea id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  '/PlaceAreas/{id}/replace':
-    post:
-      tags:
-        - PlaceArea
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: PlaceArea.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  /PlaceAreas/findOne:
-    get:
-      tags:
-        - PlaceArea
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: PlaceArea.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/PlaceArea'
-      deprecated: false
-  /PlaceAreas/update:
-    post:
-      tags:
-        - PlaceArea
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: PlaceArea.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/PlaceArea'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /PlaceAreas/count:
-    get:
-      tags:
-        - PlaceArea
-      summary: Count instances of the model matched by where from the data source.
-      operationId: PlaceArea.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
-  /PlaceAreas/addboard:
-    post:
-      tags:
-        - PlaceArea
-      operationId: PlaceArea.addBoard
-      parameters: []
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              board:
-                type: object
-      deprecated: false
-  /Boards:
-    post:
-      tags:
-        - Board
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Board.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-    put:
-      tags:
-        - Board
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Board.upsert__put_Boards
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-    patch:
-      tags:
-        - Board
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Board.upsert__patch_Boards
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-    get:
-      tags:
-        - Board
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Board.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Board'
-      deprecated: false
-  /Boards/replaceOrCreate:
-    post:
-      tags:
-        - Board
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Board.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-  /Boards/upsertWithWhere:
-    post:
-      tags:
-        - Board
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Board.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-  '/Boards/{id}/exists':
-    get:
-      tags:
-        - Board
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Board.exists__get_Boards_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Boards/{id}':
-    head:
-      tags:
-        - Board
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Board.exists__head_Boards_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Board
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Board.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-    delete:
-      tags:
-        - Board
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Board.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Board
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Board.prototype.updateAttributes__put_Boards_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Board'
-        - name: id
-          in: path
-          description: Board id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-    patch:
-      tags:
-        - Board
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Board.prototype.updateAttributes__patch_Boards_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Board'
-        - name: id
-          in: path
-          description: Board id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-  '/Boards/{id}/replace':
-    post:
-      tags:
-        - Board
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Board.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-  /Boards/findOne:
-    get:
-      tags:
-        - Board
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Board.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Board'
-      deprecated: false
-  /Boards/update:
-    post:
-      tags:
-        - Board
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Board.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Board'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Boards/count:
-    get:
-      tags:
-        - Board
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Board.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
-  /Boards/devicechange:
-    post:
-      tags:
-        - Board
-      operationId: Board.deviceChangeTrigger
-      parameters: []
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  /Boards/sensordata:
-    post:
-      tags:
-        - Board
-      operationId: Board.sensorDataTrigger
-      parameters: []
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/Groups/{id}/owner':
-    get:
-      tags:
-        - Group
-      summary: Fetches belongsTo relation owner.
-      operationId: Group.prototype.__get__owner
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: Group id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/MyUser'
-      deprecated: false
-  '/Groups/{id}/place':
-    get:
-      tags:
-        - Group
-      summary: Fetches belongsTo relation place.
-      operationId: Group.prototype.__get__place
-      parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
-        - name: id
-          in: path
-          description: Group id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Place'
-      deprecated: false
-  /Groups:
-    post:
-      tags:
-        - Group
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Group.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    put:
-      tags:
-        - Group
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Group.upsert__put_Groups
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    patch:
-      tags:
-        - Group
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Group.upsert__patch_Groups
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    get:
-      tags:
-        - Group
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Group.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Group'
-      deprecated: false
-  /Groups/replaceOrCreate:
-    post:
-      tags:
-        - Group
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Group.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  /Groups/upsertWithWhere:
-    post:
-      tags:
-        - Group
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Group.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  '/Groups/{id}/exists':
-    get:
-      tags:
-        - Group
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Group.exists__get_Groups_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Groups/{id}':
-    head:
-      tags:
-        - Group
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Group.exists__head_Groups_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Group
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Group.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    delete:
-      tags:
-        - Group
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Group.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Group
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Group.prototype.updateAttributes__put_Groups_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: Group id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-    patch:
-      tags:
-        - Group
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Group.prototype.updateAttributes__patch_Groups_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Group'
-        - name: id
-          in: path
-          description: Group id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  '/Groups/{id}/replace':
-    post:
-      tags:
-        - Group
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Group.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  /Groups/findOne:
-    get:
-      tags:
-        - Group
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Group.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Group'
-      deprecated: false
-  /Groups/update:
-    post:
-      tags:
-        - Group
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Group.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Group'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Groups/count:
-    get:
-      tags:
-        - Group
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Group.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
       deprecated: false
   /Configurations:
     post:
@@ -5308,11 +3680,11 @@ paths:
           schema:
             $ref: '#/definitions/Configuration'
       deprecated: false
-    put:
+    patch:
       tags:
         - Configuration
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Configuration.upsert__put_Configurations
+      operationId: Configuration.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -5327,11 +3699,11 @@ paths:
           schema:
             $ref: '#/definitions/Configuration'
       deprecated: false
-    patch:
+    put:
       tags:
         - Configuration
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Configuration.upsert__patch_Configurations
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: Configuration.replaceOrCreate__put_Configurations
       parameters:
         - name: data
           in: body
@@ -5371,7 +3743,7 @@ paths:
       tags:
         - Configuration
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Configuration.replaceOrCreate
+      operationId: Configuration.replaceOrCreate__post_Configurations_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -5480,6 +3852,31 @@ paths:
           schema:
             $ref: '#/definitions/Configuration'
       deprecated: false
+    put:
+      tags:
+        - Configuration
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'Configuration.replaceById__put_Configurations_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Configuration'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Configuration'
+      deprecated: false
     delete:
       tags:
         - Configuration
@@ -5498,36 +3895,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - Configuration
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Configuration.prototype.updateAttributes__put_Configurations_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Configuration'
-        - name: id
-          in: path
-          description: Configuration id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Configuration'
-      deprecated: false
     patch:
       tags:
         - Configuration
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Configuration.prototype.updateAttributes__patch_Configurations_{id}'
+      operationId: Configuration.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -5553,7 +3925,7 @@ paths:
       tags:
         - Configuration
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Configuration.replaceById
+      operationId: 'Configuration.replaceById__post_Configurations_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -5648,366 +4020,6 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /Scenes:
-    post:
-      tags:
-        - Scene
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Scene.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-    put:
-      tags:
-        - Scene
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Scene.upsert__put_Scenes
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-    patch:
-      tags:
-        - Scene
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Scene.upsert__patch_Scenes
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-    get:
-      tags:
-        - Scene
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Scene.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Scene'
-      deprecated: false
-  /Scenes/replaceOrCreate:
-    post:
-      tags:
-        - Scene
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Scene.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-  /Scenes/upsertWithWhere:
-    post:
-      tags:
-        - Scene
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Scene.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-  '/Scenes/{id}/exists':
-    get:
-      tags:
-        - Scene
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Scene.exists__get_Scenes_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Scenes/{id}':
-    head:
-      tags:
-        - Scene
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Scene.exists__head_Scenes_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Scene
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Scene.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-    delete:
-      tags:
-        - Scene
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Scene.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Scene
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Scene.prototype.updateAttributes__put_Scenes_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Scene'
-        - name: id
-          in: path
-          description: Scene id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-    patch:
-      tags:
-        - Scene
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Scene.prototype.updateAttributes__patch_Scenes_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Scene'
-        - name: id
-          in: path
-          description: Scene id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-  '/Scenes/{id}/replace':
-    post:
-      tags:
-        - Scene
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Scene.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-  /Scenes/findOne:
-    get:
-      tags:
-        - Scene
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Scene.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Scene'
-      deprecated: false
-  /Scenes/update:
-    post:
-      tags:
-        - Scene
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Scene.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Scene'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Scenes/count:
-    get:
-      tags:
-        - Scene
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Scene.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
   /UserSettings:
     post:
       tags:
@@ -6028,11 +4040,11 @@ paths:
           schema:
             $ref: '#/definitions/UserSetting'
       deprecated: false
-    put:
+    patch:
       tags:
         - UserSetting
       summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: UserSetting.upsert__put_UserSettings
+      operationId: UserSetting.patchOrCreate
       parameters:
         - name: data
           in: body
@@ -6047,11 +4059,11 @@ paths:
           schema:
             $ref: '#/definitions/UserSetting'
       deprecated: false
-    patch:
+    put:
       tags:
         - UserSetting
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: UserSetting.upsert__patch_UserSettings
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: UserSetting.replaceOrCreate__put_UserSettings
       parameters:
         - name: data
           in: body
@@ -6091,7 +4103,7 @@ paths:
       tags:
         - UserSetting
       summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: UserSetting.replaceOrCreate
+      operationId: UserSetting.replaceOrCreate__post_UserSettings_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -6200,6 +4212,31 @@ paths:
           schema:
             $ref: '#/definitions/UserSetting'
       deprecated: false
+    put:
+      tags:
+        - UserSetting
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'UserSetting.replaceById__put_UserSettings_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/UserSetting'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/UserSetting'
+      deprecated: false
     delete:
       tags:
         - UserSetting
@@ -6218,36 +4255,11 @@ paths:
           schema:
             type: object
       deprecated: false
-    put:
-      tags:
-        - UserSetting
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'UserSetting.prototype.updateAttributes__put_UserSettings_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/UserSetting'
-        - name: id
-          in: path
-          description: UserSetting id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/UserSetting'
-      deprecated: false
     patch:
       tags:
         - UserSetting
       summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'UserSetting.prototype.updateAttributes__patch_UserSettings_{id}'
+      operationId: UserSetting.prototype.patchAttributes
       parameters:
         - name: data
           in: body
@@ -6273,7 +4285,7 @@ paths:
       tags:
         - UserSetting
       summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: UserSetting.replaceById
+      operationId: 'UserSetting.replaceById__post_UserSettings_{id}_replace'
       parameters:
         - name: id
           in: path
@@ -6368,741 +4380,8 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /Notifications:
-    post:
-      tags:
-        - Notification
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Notification.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-    put:
-      tags:
-        - Notification
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Notification.upsert__put_Notifications
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-    patch:
-      tags:
-        - Notification
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Notification.upsert__patch_Notifications
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-    get:
-      tags:
-        - Notification
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Notification.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Notification'
-      deprecated: false
-  /Notifications/replaceOrCreate:
-    post:
-      tags:
-        - Notification
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Notification.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-  /Notifications/upsertWithWhere:
-    post:
-      tags:
-        - Notification
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Notification.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-  '/Notifications/{id}/exists':
-    get:
-      tags:
-        - Notification
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Notification.exists__get_Notifications_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Notifications/{id}':
-    head:
-      tags:
-        - Notification
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Notification.exists__head_Notifications_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Notification
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Notification.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-    delete:
-      tags:
-        - Notification
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Notification.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Notification
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Notification.prototype.updateAttributes__put_Notifications_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Notification'
-        - name: id
-          in: path
-          description: Notification id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-    patch:
-      tags:
-        - Notification
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Notification.prototype.updateAttributes__patch_Notifications_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Notification'
-        - name: id
-          in: path
-          description: Notification id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-  '/Notifications/{id}/replace':
-    post:
-      tags:
-        - Notification
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Notification.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-  /Notifications/findOne:
-    get:
-      tags:
-        - Notification
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Notification.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Notification'
-      deprecated: false
-  /Notifications/update:
-    post:
-      tags:
-        - Notification
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Notification.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Notifications/count:
-    get:
-      tags:
-        - Notification
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Notification.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
-  /Conversations:
-    post:
-      tags:
-        - Conversation
-      operationId: Conversation.doconversation
-      parameters: []
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              conversation:
-                type: object
-      deprecated: false
-  /Devices:
-    post:
-      tags:
-        - Device
-      summary: Create a new instance of the model and persist it into the data source.
-      operationId: Device.create
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-    put:
-      tags:
-        - Device
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Device.upsert__put_Devices
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-    patch:
-      tags:
-        - Device
-      summary: Patch an existing model instance or insert a new one into the data source.
-      operationId: Device.upsert__patch_Devices
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-    get:
-      tags:
-        - Device
-      summary: Find all instances of the model matched by filter from the data source.
-      operationId: Device.find
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Device'
-      deprecated: false
-  /Devices/replaceOrCreate:
-    post:
-      tags:
-        - Device
-      summary: Replace an existing model instance or insert a new one into the data source.
-      operationId: Device.replaceOrCreate
-      parameters:
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-  /Devices/upsertWithWhere:
-    post:
-      tags:
-        - Device
-      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
-      operationId: Device.upsertWithWhere
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-  '/Devices/{id}/exists':
-    get:
-      tags:
-        - Device
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Device.exists__get_Devices_{id}_exists'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-  '/Devices/{id}':
-    head:
-      tags:
-        - Device
-      summary: Check whether a model instance exists in the data source.
-      operationId: 'Device.exists__head_Devices_{id}'
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              exists:
-                type: boolean
-      deprecated: false
-    get:
-      tags:
-        - Device
-      summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: Device.findById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: filter
-          in: query
-          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-    delete:
-      tags:
-        - Device
-      summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: Device.deleteById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-      deprecated: false
-    put:
-      tags:
-        - Device
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Device.prototype.updateAttributes__put_Devices_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Device'
-        - name: id
-          in: path
-          description: Device id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-    patch:
-      tags:
-        - Device
-      summary: Patch attributes for a model instance and persist it into the data source.
-      operationId: 'Device.prototype.updateAttributes__patch_Devices_{id}'
-      parameters:
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Device'
-        - name: id
-          in: path
-          description: Device id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-  '/Devices/{id}/replace':
-    post:
-      tags:
-        - Device
-      summary: Replace attributes for a model instance and persist it into the data source.
-      operationId: Device.replaceById
-      parameters:
-        - name: id
-          in: path
-          description: Model id
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: Model instance data
-          required: false
-          schema:
-            description: Model instance data
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-  /Devices/findOne:
-    get:
-      tags:
-        - Device
-      summary: Find first instance of the model matched by filter from the data source.
-      operationId: Device.findOne
-      parameters:
-        - name: filter
-          in: query
-          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/Device'
-      deprecated: false
-  /Devices/update:
-    post:
-      tags:
-        - Device
-      summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: Device.updateAll
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          description: An object of model property name/value pairs
-          required: false
-          schema:
-            description: An object of model property name/value pairs
-            $ref: '#/definitions/Device'
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            description: Information related to the outcome of the operation
-            type: object
-            properties:
-              count:
-                description: The number of instances updated
-                type: number
-                format: double
-      deprecated: false
-  /Devices/count:
-    get:
-      tags:
-        - Device
-      summary: Count instances of the model matched by where from the data source.
-      operationId: Device.count
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
-      deprecated: false
+
+
 definitions:
   x-any:
     properties: {}
@@ -7118,22 +4397,10 @@ definitions:
         type: string
       username:
         type: string
-      credentials:
-        type: object
-      challenges:
-        type: object
       email:
         type: string
       emailVerified:
         type: boolean
-      status:
-        type: string
-      created:
-        type: string
-        format: date-time
-      lastUpdated:
-        type: string
-        format: date-time
       id:
         type: string
     required:
@@ -7193,22 +4460,10 @@ definitions:
         type: string
       username:
         type: string
-      credentials:
-        type: object
-      challenges:
-        type: object
       email:
         type: string
       emailVerified:
         type: boolean
-      status:
-        type: string
-      created:
-        type: string
-        format: date-time
-      lastUpdated:
-        type: string
-        format: date-time
       id:
         type: number
         format: double
@@ -7224,6 +4479,11 @@ definitions:
         description: time to live in seconds (2 weeks by default)
         type: number
         format: double
+      scopes:
+        description: Array of scopes granted to this access token.
+        type: array
+        items:
+          type: string
       created:
         type: string
         format: date-time
@@ -7274,113 +4534,11 @@ definitions:
       id:
         type: string
       principalType:
-        description: 'The principal type, such as user, application, or role'
+        description: 'The principal type, such as USER, APPLICATION, ROLE, or user model name in case of multiple user models'
         type: string
       principalId:
         type: string
       roleId:
-        type: string
-    additionalProperties: false
-  Group:
-    properties:
-      audit:
-        type: object
-      description:
-        description: Group Description
-        type: string
-      members:
-        type: object
-      ownerId:
-        type: string
-      placeId:
-        type: string
-      title:
-        description: Group Title
-        type: string
-      id:
-        type: string
-    required:
-      - ownerId
-      - placeId
-    additionalProperties: false
-  Place:
-    properties:
-      audit:
-        type: object
-      description:
-        type: string
-      floor:
-        type: string
-      gatewayId:
-        type: string
-      location:
-        type: object
-      ownerId:
-        type: string
-      title:
-        type: string
-      id:
-        type: string
-    required:
-      - title
-    additionalProperties: false
-  PlaceArea:
-    properties:
-      audit:
-        type: object
-      description:
-        type: string
-      devices:
-        type: object
-      floor:
-        type: string
-      placeId:
-        type: string
-      title:
-        type: string
-      type:
-        type: string
-      sensors:
-        $ref: '#/definitions/x-any'
-      id:
-        type: string
-    required:
-      - floor
-      - placeId
-      - title
-    additionalProperties: false
-  Board:
-    properties:
-      audit:
-        type: object
-      connectedToId:
-        type: string
-      connectedToType:
-        type: string
-      description:
-        type: string
-      gatewayId:
-        type: string
-      mfgDate:
-        type: string
-        format: date-time
-      owner:
-        type: object
-      placeId:
-        type: string
-      status:
-        type: string
-      subType:
-        type: string
-      title:
-        type: string
-      type:
-        type: string
-      uniqueIdentifier:
-        type: string
-      sensors:
-        type: object
-      id:
         type: string
     additionalProperties: false
   Configuration:
@@ -7391,35 +4549,6 @@ definitions:
         type: object
       id:
         type: string
-    additionalProperties: false
-  Scene:
-    properties:
-      areas:
-        $ref: '#/definitions/x-any'
-      audit:
-        type: object
-      description:
-        type: string
-      lastExecutedTime:
-        type: string
-        format: date-time
-      placeId:
-        type: string
-      settings:
-        type: object
-      title:
-        type: string
-      type:
-        description: 'TIME, TEMP, HUM, WATERLEVEL'
-        type: string
-      status:
-        description: 'ACTIVE | INACTIVE | RUNNING'
-        type: string
-      id:
-        type: string
-    required:
-      - placeId
-      - title
     additionalProperties: false
   UserSetting:
     properties:
@@ -7437,105 +4566,4 @@ definitions:
       id:
         type: string
     additionalProperties: false
-  Notification:
-    properties:
-      email:
-        description: 'To, CC, BCC etc'
-        type: object
-      group:
-        description: Notify all members of Group
-        type: object
-      push:
-        type: boolean
-      sms:
-        type: object
-      type:
-        description: 'DEVICE, BOARD, PLACE'
-        type: string
-      typeId:
-        type: string
-      typeParentId:
-        type: string
-      typeValue:
-        $ref: '#/definitions/x-any'
-      userId:
-        type: string
-      id:
-        type: string
-    additionalProperties: false
-  Device:
-    properties:
-      analog:
-        type: boolean
-      config:
-        type: object
-      description:
-        type: string
-      deviceId:
-        type: string
-      deviceIndex:
-        type: number
-        format: double
-      deviceValue:
-        type: number
-        format: double
-      deviceValueUnits:
-        type: string
-      parentId:
-        type: string
-      status:
-        type: string
-      title:
-        type: string
-      type:
-        type: string
-      updatedAt:
-        type: string
-        format: date-time
-      id:
-        type: string
-    required:
-      - deviceIndex
-      - parentId
-    additionalProperties: false
-basePath: /api
-swagger: '2.0'
-info:
-  x-ibm-name: hbuddy
-  version: 1.0.0
-  title: hbuddy
-schemes:
-  - https
-host: $(catalog.host)
-consumes:
-  - application/json
-produces:
-  - application/json
-securityDefinitions:
-  clientIdHeader:
-    type: apiKey
-    in: header
-    name: X-IBM-Client-Id
-  clientSecretHeader:
-    in: header
-    name: X-IBM-Client-Secret
-    type: apiKey
-security:
-  - clientIdHeader: []
-    clientSecretHeader: []
-x-ibm-configuration:
-  testable: true
-  enforced: true
-  cors:
-    enabled: true
-  catalogs:
-    apic-dev:
-      properties:
-        runtime-url: $(TARGET_URL)
-    sb:
-      properties:
-        runtime-url: 'http://localhost:4001'
-  assembly:
-    execute:
-      - invoke:
-          target-url: $(runtime-url)$(request.path)$(request.search)
+

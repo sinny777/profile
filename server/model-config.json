@@ -49,48 +49,16 @@
     "dataSource": "accounts",
     "public": true
   },
-  "Place": {
-    "dataSource": "places",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "PlaceArea": {
-    "dataSource": "placeareas",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Board": {
-    "dataSource": "boards",
-    "public": true
-  },
-  "Group": {
-    "dataSource": "groups",
-    "public": true
-  },
   "Configuration": {
     "dataSource": "configurations",
-    "public": true
-  },
-  "Scene": {
-    "dataSource": "scenes",
     "public": true
   },
   "UserSetting": {
     "dataSource": "usersettings",
     "public": true
   },
-  "Notification": {
-    "dataSource": "notifications",
-    "public": true
-  },
   "Conversation": {
     "dataSource": "db",
-    "public": true
-  },
-  "Device": {
-    "dataSource": "devices",
     "public": true
   }
 }

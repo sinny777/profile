@@ -7,12 +7,12 @@
 
 define(['angular'], function (angular) {
 	'use strict';
-  
+
 	return angular.module('app.config', [])
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'LOCAL',
-			API_URL: '//hukam-dev.mybluemix.net/api',
+			API_URL: '//all-about-gurvinder.mybluemix.net/api',
 			IOT_CONFIG:{
 				"org": "rqeofj",
 			    "id": "a-rqeofj-i7nm1fdo5d",
@@ -22,5 +22,5 @@ define(['angular'], function (angular) {
 			    "gatewayType": "HukamGateway"
 			}
 		});
-    
+
 });
