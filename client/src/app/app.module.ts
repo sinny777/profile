@@ -10,7 +10,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { MarkerManager } from '@agm/core/services/managers/marker-manager';
-import { DisqusModule } from 'angular2-disqus';
+import { DisqusModule } from "ngx-disqus";
 import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
 
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     Angular2SocialLoginModule,
-    DisqusModule,
+    DisqusModule.forRoot('gurvinder'),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD3oMSe59cIpUnouvFcWT3oP3iPwsRp5zk'
     })

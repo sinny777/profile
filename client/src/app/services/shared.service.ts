@@ -7,7 +7,7 @@ export class SharedService {
   private currentUser: any;
 
   public CONFIG = {
-                    API_BASE_URL: "//hukamtechnologies.com/api",
+                    API_BASE_URL: "//all-about-gurvinder.mybluemix.net/api",
                     GATEWAY_TYPE: "AQ-Gateway",
                     MQTT_OPTIONS: {
                                     api_key: "a-kwhgvg-w667tv552u",
@@ -30,7 +30,7 @@ export class SharedService {
 
      public setCurrentUser(user){
        console.log("IN setCurrentUser: >> ", user);
-       this.currentUser = user;       
+       this.currentUser = user;
      }
 
      public getCurrentUser(){

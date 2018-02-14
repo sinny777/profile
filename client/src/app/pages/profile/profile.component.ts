@@ -10,11 +10,13 @@ export class ProfileComponent implements OnInit {
 
   currentUser: any;
 
-  pageIdentifier: "GurvinderProfile";
-  pageUrl: "https://all-about-gurvinder.mybluemix.net";
+  disqusConfig: any;
 
   constructor(public sharedService: SharedService) {
-
+    this.disqusConfig = {
+                    "pageIdentifier": "GurvinderProfile",
+                    "pageUrl": "https://all-about-gurvinder.mybluemix.net"
+                  };
   }
 
   ngOnInit() {
