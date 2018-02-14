@@ -2,7 +2,7 @@
  * PRODUCTION CLIENT CONFIGURATION
  */
 
-// API_URL: 'http://hbuddy.hukam.in/api'
+// API_URL: 'http://all-about-gurvinder.mybluemix.net/api'
 // API_URL: 'http://localhost:3000/api'
 
 define(['angular'], function (angular) {
