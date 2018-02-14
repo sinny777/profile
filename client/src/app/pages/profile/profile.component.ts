@@ -10,6 +10,9 @@ export class ProfileComponent implements OnInit {
 
   currentUser: any;
 
+  pageIdentifier: "GurvinderProfile";
+  pageUrl: "https://all-about-gurvinder.mybluemix.net";
+
   constructor(public sharedService: SharedService) {
 
   }
