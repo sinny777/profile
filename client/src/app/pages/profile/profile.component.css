@@ -1,10 +1,16 @@
 
 #profile_header{
-  min-height: 400px;
+  background-image: url("/assets/images/profile-wallpaper-3.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000000;
+  min-height: 430px;
+  /* height: 400px; */
 }
 
 #profile_header .container{
-  padding-top: 100px
+  padding-top: 140px
 }
 
 .profile-page .brand {
