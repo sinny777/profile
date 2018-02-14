@@ -5,14 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { Angular2SocialLoginModule } from "angular2-social-login";
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { MarkerManager } from '@agm/core/services/managers/marker-manager';
 import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
-import { HBuddyComponent } from './pages/h-buddy/h-buddy.component';
 
 let providers = {
     "google": {
@@ -29,16 +28,14 @@ let providers = {
 
 const appRoutes: Routes = [
   { path: 'public/dashboard', component: DashboardComponent },
-  { path: '',      component: HomeComponent },
-  { path: 'iot/hbuddy', component: HBuddyComponent }
+  { path: '',      component: ProfileComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    DashboardComponent,
-    HBuddyComponent
+    ProfileComponent,
+    DashboardComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
