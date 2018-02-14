@@ -38,6 +38,10 @@ export class AppComponent {
     );
   }
 
+  gotoRegister(){
+    console.log("IN gotoRegister: >>> ");
+  }
+
   handleLogin(post){
     console.log("IN handleLogin: >>> ", JSON.stringify(post));
   }
