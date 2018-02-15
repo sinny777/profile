@@ -37,7 +37,7 @@ export class CommonService {
      }
    }
 
-   private extractData(res) {
+   private extractData(res: Response | any) {
          let body = res.json();
          return body;
    }
