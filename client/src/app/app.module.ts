@@ -15,6 +15,7 @@ import { DisqusModule } from "ngx-disqus";
 import { ShareModule } from '@ngx-share/core';
 import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
+import { CommonService } from './services/common.service';
 
 let providers = {
     "google": {
@@ -54,7 +55,7 @@ const appRoutes: Routes = [
       apiKey: 'AIzaSyD3oMSe59cIpUnouvFcWT3oP3iPwsRp5zk'
     })
   ],
-  providers: [GoogleMapsAPIWrapper, MarkerManager, MqttService, SharedService],
+  providers: [GoogleMapsAPIWrapper, MarkerManager, MqttService, SharedService, CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 {
-  "name": "Conversation",
+  "name": "CommonTask",
+  "plural": "CommonTask",
   "base": "Model",
   "idInjection": true,
   "options": {
@@ -11,7 +12,7 @@
         "create",
         "update",
         "destroy",
-        "doconversation"
+        "sendemail"
       ]
     }
   },
@@ -23,7 +24,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "doconversation"
+      "property": "sendemail"
     }
   ],
   "methods": {}

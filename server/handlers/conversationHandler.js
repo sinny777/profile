@@ -6,7 +6,7 @@ var CONFIG = require('../../common/config/config').get(),
     watson = require('watson-developer-cloud'),
     request = require('request'),
     format = require('util').format,
-    conversationConfig = CONFIG.SERVICES_CONFIG.conversation,
+    conversationConfig = CONFIG.SERVICES_CONFIG.CONVERSATION,
     conversation_service = watson.conversation(conversationConfig.credentials);
 
 var feedsHandler = require('../../server/handlers/feedsHandler')();
@@ -14,9 +14,9 @@ var searchHandler = require('../../server/handlers/searchHandler')();
 var commonHandler = require('../../server/handlers/commonHandler')();
 
 module.exports = function(app) {
-    
+
 var methods = {};
-  	
+
 	methods.callConversation = function(reqPayload, cb) {
 		if(!reqPayload && !reqPayload.params || !reqPayload.params.input){
 			cb("INVALID PARMS FOR CONVERSATION ! ", null);
@@ -31,11 +31,11 @@ var methods = {};
             handleConversationResponse(err, conversationResp, cb);
         });
 	};
-	
+
 	function handleConversationResponse(err, conversationResp, cb){
 		var response = {conversationResp: conversationResp};
-		
-		if(conversationResp.intents && conversationResp.intents.length > 0 
+
+		if(conversationResp.intents && conversationResp.intents.length > 0
 			&& conversationResp.intents[0].intent == 'appliance_action'){
 			handleApplianceAction(response, function(err, resp){
 				cb(err, resp);
@@ -48,7 +48,7 @@ var methods = {};
 				cb(err, response);
 				return false;
 			}
-			
+
 			switch(next_action) {
 			    case "weather_service":
 			    	getWeather(response, function(err, resp){
@@ -83,18 +83,18 @@ var methods = {};
 			    default:
 			    	cb(err, response);
 			}
-			
+
 		}else if(conversationResp && conversationResp.output && conversationResp.output.text){
 				cb(err, response);
 			}else{
 				cb(err, response);
 			}
 	};
-	
+
 	function handleApplianceAction(response, cb){
 		if(response.conversationResp.context && response.conversationResp.context.gatewayId){
 			console.log("IN handleApplianceAction, Fetch Data for Gateway: >>> ", response.conversationResp);
-			
+
 			if(response.conversationResp.entities && response.conversationResp.entities.length > 0){
 				var area, action, appliance;
 				for(var i = 0; i < response.conversationResp.entities.length; i++){
@@ -110,16 +110,16 @@ var methods = {};
 					}
 				}
 				console.log("ACTION: ", action, ", AREA: ", area, ", APPLIANCE: ", appliance);
-			}		
-			
+			}
+
 		}
 		cb(null, response);
 	};
-	
+
 	function getRandomJoke(response, cb){
 		cb(null, response);
 	};
-	
+
 	function searchGoogle(response, cb) {
 	    console.log('Doing Google Search ');
 	    var params = {"keyword": response.conversationResp.input.text};
@@ -139,7 +139,7 @@ var methods = {};
 	        }
 	    });
 	};
-	
+
 	function getNewsFeeds(response, cb) {
 	    console.log('fetching News Feeds');
 	    var params = {"feedURL": "http://feeds.feedburner.com/ndtvnews-latest"};
@@ -160,7 +160,7 @@ var methods = {};
 	        }
 	    });
 	};
-	
+
 	function getWeather(response, cb) {
 		var location = response.conversationResp.context.location;
 		if(!location){
@@ -184,8 +184,8 @@ var methods = {};
 	        }
 	        try {
 	        	var weather = body.query.results.channel.item.condition;
-	        	
-	        	var temperature = Number((weather.temp - 32) * 5/9).toFixed(2); 
+
+	        	var temperature = Number((weather.temp - 32) * 5/9).toFixed(2);
 	        	if(location)
 	        	var respText = format('The current weather conditions in %s are %s degrees and %s.', location, temperature, weather.text);
 	        	response.conversationResp.output = {
@@ -199,7 +199,7 @@ var methods = {};
 	        }
 	    });
 	};
-	
+
     return methods;
-    
+
 }

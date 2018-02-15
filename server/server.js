@@ -6,6 +6,11 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var path = require('path');
 
+require('dotenv').config({path: process.env.PWD+"/.env"});
+
+// console.log(path.resolve(__dirname, '..', '/.env'));
+ // console.log(process.env.PWD+"/.env");
+ 
 var app = module.exports = loopback();
 
 //Passport configurators..

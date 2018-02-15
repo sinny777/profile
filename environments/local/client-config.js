@@ -12,14 +12,14 @@ define(['angular'], function (angular) {
 		.constant('CONFIG', {
 			VERSION: '0.1',
 			ENVIRONMENT: 'LOCAL',
-			API_URL: 'http://localhost:3000/api',
+			API_URL: '//all-about-gurvinder.mybluemix.net/api',
 			IOT_CONFIG:{
-				"org": "rqeofj",
-			    "id": "a-rqeofj-i7nm1fdo5d",
-			    "authkey": "a-rqeofj-i7nm1fdo5d",
-			    "authtoken": "3X0bTD*8tf4Q1rq12n",
+				"org": "",
+			    "id": "",
+			    "authkey": "",
+			    "authtoken": "",
 			    "type": "shared",
-			    "gatewayType": "HukamGateway"
+			    "gatewayType": ""
 			}
 		});
 

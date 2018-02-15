@@ -60,5 +60,9 @@
   "Conversation": {
     "dataSource": "db",
     "public": true
+  },
+  "CommonTask": {
+    "dataSource": "db",
+    "public": true
   }
 }

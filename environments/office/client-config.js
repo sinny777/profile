@@ -11,15 +11,15 @@ define(['angular'], function (angular) {
 	return angular.module('app.config', [])
 		.constant('CONFIG', {
 			VERSION: '0.1',
-			ENVIRONMENT: 'OFFICE',
+			ENVIRONMENT: 'LOCAL',
 			API_URL: '//all-about-gurvinder.mybluemix.net/api',
 			IOT_CONFIG:{
-				"org": "o6oosq",
-			    "id": "a-o6oosq-gwvhfgityg",
-			    "authkey": "a-o6oosq-gwvhfgityg",
-			    "authtoken": "xwottObtqR@WHSe+q-",
+				"org": "",
+			    "id": "",
+			    "authkey": "",
+			    "authtoken": "",
 			    "type": "shared",
-			    "gatewayType": "HukamGateway"
+			    "gatewayType": ""
 			}
 		});
 
