@@ -24,7 +24,7 @@ export class CommonService {
    }
 
    sendEmail(payload): Promise<any>{
-     console.log("IN ideaService.saveIdea: >>> ", payload);
+     console.log("IN commonService.sendEmail: >>> ", payload);
      let POST_URL: string = environment.API_BASE_URL + "/CommonTask/sendemail";
      if(!payload || !payload.from || !payload.to){
          return Promise.reject("INVALID DATA FOR SENDING EMAIL !");
