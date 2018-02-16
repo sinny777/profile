@@ -16,6 +16,7 @@ import { ShareModule } from '@ngx-share/core';
 import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
 import { CommonService } from './services/common.service';
+import { SocialComponent } from './pages/social/social.component';
 
 let providers = {
     "google": {
@@ -31,15 +32,17 @@ let providers = {
   };
 
 const appRoutes: Routes = [
+  { path: '',      component: DashboardComponent },
   { path: 'professional', component: ProfileComponent },
-  { path: '',      component: DashboardComponent }
+  { path: 'social', component: SocialComponent }  
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    SocialComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

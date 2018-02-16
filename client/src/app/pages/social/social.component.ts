@@ -3,11 +3,11 @@ import { SharedService } from '../../services/shared.service';
 import { ShareButtons } from '@ngx-share/core';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-social',
+  templateUrl: './social.component.html',
+  styleUrls: ['./social.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class SocialComponent implements OnInit {
 
   currentUser: any;
   disqusConfig: any;
@@ -16,8 +16,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(public sharedService: SharedService, public share: ShareButtons) {
     this.disqusConfig = {
-                    "pageIdentifier": "Professional",
-                    "pageUrl": "http://www.gurvinder.info/professional"
+                    "pageIdentifier": "Social",
+                    "pageUrl": "http://www.gurvinder.info/social"
                   };
   }
 
