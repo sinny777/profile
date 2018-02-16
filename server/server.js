@@ -10,7 +10,7 @@ require('dotenv').config({path: process.env.PWD+"/.env"});
 
 // console.log(path.resolve(__dirname, '..', '/.env'));
  // console.log(process.env.PWD+"/.env");
- 
+
 var app = module.exports = loopback();
 
 //Passport configurators..
@@ -24,7 +24,7 @@ var passportConfigurator = new PassportConfigurator(app);
 var ignoredPaths = ['/api/', '/explorer', '/status'];
 app.all('/*', function(req, res, next) {
   if(!includes(req.originalUrl, ignoredPaths)){
-    if(req.url == '/' || includes(req.originalUrl, ['/public', '/iot', '/account'])){
+    if(req.url == '/' || includes(req.originalUrl, ['/public', '/professional', '/social'])){
         res.sendFile('index.html', { root: path.resolve(__dirname, '..', 'client/dist') });
     }else{
         res.sendFile(path.resolve(req.url), { root: path.resolve(__dirname, '..', 'client/dist') });

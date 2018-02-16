@@ -31,8 +31,8 @@ let providers = {
   };
 
 const appRoutes: Routes = [
-  { path: 'public/dashboard', component: DashboardComponent },
-  { path: '',      component: ProfileComponent }
+  { path: 'professional', component: ProfileComponent },
+  { path: '',      component: DashboardComponent }
 ];
 
 @NgModule({

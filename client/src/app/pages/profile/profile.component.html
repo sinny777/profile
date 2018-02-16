@@ -4,9 +4,9 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="brand text-center">
-						<h1>All About Gurvinder</h1>
+						<h1>Professional</h1>
 						<!-- <h2>The difference between stupidity and genius is that genius has its limits. </h2> -->
-						<h2>Genius is the ability to put into effect what is on your mind.</h2>
+						<h2>I have my flaws too, but I'm a professional who doesn't want to miss or lose.</h2>
 						<!-- <h4>Albert Einstein</h4> -->
 					</div>
 				</div>
@@ -18,16 +18,11 @@
 					<div class="profile-content">
 							<div class="container">
 								<div class="row">
-										<div class="profile">
-												<div class="avatar">
-														<img src="../assets/images/profile.jpeg" alt="Circle Image" class="img-circle img-responsive img-raised">
+												<div class="col-md-8 col-md-offset-2 text-center">
+													<h3 class="title">Gurvinder Singh</h3>
+														<h6>Cloud Solutions Architect (IBM - ISL)</h6>
+														<a href="https://docs.google.com/document/d/1JldXwBrKdfS_aT9W0WcqoCYXo1x6EAph--omXWiF23A/edit?usp=sharing" target="_blank" class="btn btn-primary btn-xs">Download Resume</a>
 												</div>
-												<div class="name">
-														<h3 class="title">Gurvinder Singh</h3>
-															<h6>Cloud Solutions Architect (IBM - ISL)</h6>
-															<a href="https://docs.google.com/document/d/1JldXwBrKdfS_aT9W0WcqoCYXo1x6EAph--omXWiF23A/edit?usp=sharing" target="_blank" class="btn btn-primary btn-xs">Download Resume</a>
-												</div>
-										</div>
 								</div>
 
 								<div class="row">
@@ -159,107 +154,8 @@ Push, Webservices(REST + SOAP), JAXB 2.0, Jersey, OAuth 1.0, OAuth 2.0, Google A
 										</div>
 								</div>
 
-								<hr />
-
 							</div>
 
 					</div>
 
-		</div>
-
-		<div class="cd-section" id="contactus">
-
-			<div class="contactus-1 section-image" style="background-image: url('/assets/images/contact.jpg')">
-
-				<div class="container">
-					<div class="row">
-						<div class="col-md-7">
-							<h2 class="title">Get in Touch</h2>
-							<!-- <h5 class="description">You need more information? Check what other persons are saying about our product. They are very happy with their purchase.</h5> -->
-							<div class="info info-horizontal">
-								<div class="icon icon-primary">
-									<i class="material-icons">email</i>
-								</div>
-								<div class="description">
-									<h4 class="info-title">sinny777@gmail.com</h4>
-								</div>
-							</div>
-							<div class="info info-horizontal">
-								<div class="icon icon-primary">
-									<i class="material-icons">phone</i>
-								</div>
-								<div class="description">
-									<h4 class="info-title">+91 9643989377</h4>
-								</div>
-							</div>
-
-							<div class=" sharing-area text-center">
-											<button shareButton="twitter" class="btn btn-twitter">
-											  <i class="fa fa-twitter"></i>
-											</button>
-											<button shareButton="facebook" class="btn btn-facebook">
-											  <i class="fa fa-facebook-square"></i>
-											</button>
-											<button shareButton="google" class="btn btn-google-plus">
-											  <i class="fa fa-google-plus"></i>
-											</button>
-											<button shareButton="linkedin" class="btn btn-linkedin">
-											  <i class="fa fa-linkedin"></i>
-											</button>
-							</div>
-
-						</div>
-						<div class="col-md-5">
-							<div class="card card-contact">
-								<form role="form" #contactForm="ngForm" method="post">
-									<div class="header header-raised header-primary text-center">
-										<h4 class="card-title">Contact Me</h4>
-									</div>
-									<div class="card-content">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">First name</label>
-													<input type="text" class="form-control"	#firstName="ngModel" name="firstName" required [(ngModel)]="contactPayload.firstName">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Last name</label>
-													<input type="text" class="form-control"	#lastName="ngModel" name="lastName" [(ngModel)]="contactPayload.lastName">
-												</div>
-											</div>
-										</div>
-										<div class="form-group label-floating">
-											<label class="control-label">Email address</label>
-											<input type="text" class="form-control"	#firstName="ngModel" name="email" required [(ngModel)]="contactPayload.email">
-										</div>
-										<div class="form-group label-floating">
-											<label class="control-label">Your message</label>
-											<textarea class="form-control" rows="6" #message="ngModel" name="message" [(ngModel)]="contactPayload.message" placeholder="Your Message..."></textarea>
-										</div>
-
-										<div class="row">
-											<div class="col-md-6">
-												<div class="checkbox">
-													<label>
-														<input type="checkbox" name="optionsCheckboxes">
-														I'm not a robot
-													</label>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<button type="submit" class="btn btn-primary pull-right" (click)="sendEmail();" [disabled]="!contactForm.form.valid">Send Message</button>
-											</div>
-										</div>
-
-									</div>
-
-								</form>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
 		</div>
