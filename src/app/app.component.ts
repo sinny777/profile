@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from './services/common.service';
-import { AuthService } from "angular2-social-login";
 import { SharedService } from './services/shared.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class AppComponent {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
-  constructor(public _auth: AuthService, public sharedService: SharedService, public commonService: CommonService, private fb: FormBuilder){
+  constructor(public sharedService: SharedService, public commonService: CommonService, private fb: FormBuilder){
       this.currentUser = this.sharedService.getCurrentUser();
       this.loginForm = fb.group({
         'username' : [null, Validators.required],
@@ -39,14 +38,6 @@ export class AppComponent {
 
   signIn(provider){
     console.log("Sign In to: >>> ", provider);
-    this.sub = this._auth.login(provider).subscribe(
-      (data) => {
-                  console.log(data);
-                  this.currentUser = data;
-                  this.sharedService.setCurrentUser(this.currentUser);
-                  this.closeBtn.nativeElement.click();
-                }
-    );
   }
 
   gotoRegister(){
@@ -58,11 +49,7 @@ export class AppComponent {
   }
 
   logout(){
-    this._auth.logout().subscribe(
-      (data)=>{
-        this.currentUser = null;
-      }
-    );
+  
   }
 
   sendEmail(){
