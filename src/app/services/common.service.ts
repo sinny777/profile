@@ -38,8 +38,15 @@ export class CommonService {
    }
 
    private extractData(res: Response | any) {
-         let body = res.json();
-         return body;
+     try{
+           if(res && res.json()){
+             return res.json();
+           }else{
+             return res;
+           }
+     }catch(err){
+            return res;
+     }
    }
 
    private handleErrorPromise (error: Response | any) {

@@ -7,7 +7,7 @@ export class SharedService {
   private currentUser: any;
 
   public CONFIG = {
-                    API_BASE_URL: "//api.hukamtechnologies.com/api"                  
+                    API_BASE_URL: "http://api.hukamtechnologies.com/api"                  
                   };
 
     constructor() {
