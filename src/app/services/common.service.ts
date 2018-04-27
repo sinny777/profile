@@ -25,7 +25,7 @@ export class CommonService {
 
    sendEmail(payload): Promise<any>{
      console.log("IN commonService.sendEmail: >>> ", payload);
-     let POST_URL: string = environment.API_BASE_URL + "/CommonTask/sendemail";
+     let POST_URL: string = environment.API_BASE_URL + "/Notifications/email";
      if(!payload || !payload.from || !payload.to){
          return Promise.reject("INVALID DATA FOR SENDING EMAIL !");
      }else{

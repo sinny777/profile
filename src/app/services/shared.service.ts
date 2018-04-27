@@ -7,21 +7,7 @@ export class SharedService {
   private currentUser: any;
 
   public CONFIG = {
-                    API_BASE_URL: "//all-about-gurvinder.mybluemix.net/api",
-                    GATEWAY_TYPE: "AQ-Gateway",
-                    MQTT_OPTIONS: {
-                                    api_key: "a-kwhgvg-w667tv552u",
-                                    auth_token: "i?ZazBDehiQwoSnKo!",
-                                    orgId: "kwhgvg",
-                                    clientId: "a:kwhgvg:",
-                                    hostname: "kwhgvg.messaging.internetofthings.ibmcloud.com",
-                                    port: 8883,
-                                    protocol: "https",
-                                    connectOnCreate: false,
-                                    path: '/mqtt',
-                                    keepAliveInterval: 3600,
-                                    useSSL: true
-                                  }
+                    API_BASE_URL: "//api.hukamtechnologies.com/api"                  
                   };
 
     constructor() {

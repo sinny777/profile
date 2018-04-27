@@ -9,7 +9,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DisqusModule } from "ngx-disqus";
 import { ShareModule } from '@ngx-share/core';
-import { MqttService } from './services/mqtt.service';
 import { SharedService } from './services/shared.service';
 import { CommonService } from './services/common.service';
 import { SocialComponent } from './pages/social/social.component';
@@ -37,7 +36,7 @@ const appRoutes: Routes = [
     HttpClientJsonpModule, // (Optional) For linkedIn & Tumblr counts
     ShareModule.forRoot()
   ],
-  providers: [MqttService, SharedService, CommonService],
+  providers: [SharedService, CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
