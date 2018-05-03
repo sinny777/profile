@@ -5,24 +5,27 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ThemeComponent } from './pages/theme/theme.component';
+import { ProfessionalComponent } from './pages/professional/professional.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SocialComponent } from './pages/social/social.component';
 import { DisqusModule } from "ngx-disqus";
 import { ShareModule } from '@ngx-share/core';
 import { SharedService } from './services/shared.service';
 import { CommonService } from './services/common.service';
-import { SocialComponent } from './pages/social/social.component';
 
 const appRoutes: Routes = [
   { path: '',      component: DashboardComponent },
-  { path: 'professional', component: ProfileComponent },
+  { path: 'theme', component: ThemeComponent },
+  { path: 'professional', component: ProfessionalComponent },
   { path: 'social', component: SocialComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
+    ThemeComponent,
+    ProfessionalComponent,
     DashboardComponent,
     SocialComponent
   ],

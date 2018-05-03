@@ -1,71 +1,44 @@
 
-<nav class="navbar navbar-primary navbar-transparent navbar-fixed-top navbar-color-on-scroll" >
+<nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav" >
 	<div class="container">
-        <div class="navbar-header">
-		    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
-		        	<span class="sr-only">Toggle navigation</span>
-		        	<span class="icon-bar"></span>
-		        	<span class="icon-bar"></span>
-		        	<span class="icon-bar"></span>
-		    	</button>
-	    		<a routerLink="/">
-	        	<div class="logo-container" *ngIf="showLogo">
-							<div class="logo">
-									<img src="../assets/images/profile.jpeg" alt="Home" rel="tooltip" title="Gurvinder Profile" data-placement="bottom" data-html="true">
-							</div>
-	                <div class="brand">
-	                    <!-- AllAboutGurvinder -->
-	                </div>
+      <div class="navbar-translate">
+				<a routerLink="/">
+					<div class="logo-container" *ngIf="showLogo">
+						<div class="logo">
+								<img src="../assets/images/profile.jpeg" alt="Home" rel="tooltip" title="Gurvinder Profile" data-placement="bottom" data-html="true">
 						</div>
-	      	</a>
-	    </div>
+								<div class="brand">
+										<!-- AllAboutGurvinder -->
+								</div>
+					</div>
+				</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
 
-	    <div class="collapse navbar-collapse" id="navigation-index">
-	    	<ul class="nav navbar-nav navbar-right">
-						<!-- <li *ngIf="!currentUser || !currentUser.name">
-								<a href="#" data-toggle="modal" data-target="#loginModal">
-									<i class="material-icons">login</i> Login
-								</a>
-						</li>
-						<li *ngIf="currentUser && currentUser.name" class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									 {{currentUser.name}}
-								</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-										<li><a routerLink="/account" >Account Settings</a></li>
-										<li class="divider"></li>
-										<li><a href="javascript:void(0);" (click)="logout();">Logout</a></li>
-								</ul>
-						</li>
-						<li *ngIf="currentUser && currentUser.email == 'sinny777@gmail.com'" class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Admin
-								</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-										<li><a target="_blank" href="https://console.bluemix.net/services/iotf-service/fcff5d8e-6106-4013-b5a6-26c1de9917fa" >IoT Platform</a></li>
-										<li><a target="_blank" href="https://34fd0b82-60b8-4d0d-9231-1f03135d4273-bluemix.cloudant.com/dashboard.html#/_all_dbs">CloudantDB</a></li>
-										<li><a target="_blank" href="https://watson-conversation.ng.bluemix.net/us-south/9cafee8e-239f-412a-ae15-5bb338f83803/workspaces">Conversation</a></li>
-										<li><a target="_blank" href="https://console.bluemix.net/services/Object-Storage/cc2840c0-0a4a-4e30-a58c-4fb16873bc12">Object Storage</a></li>
-										<li><a target="_blank" href="https://console.bluemix.net/devops/pipelines/56d9538c-ef70-4c9a-b3cc-0254e653eda8?env_id=ibm:yp:us-south">DevOps</a></li>
-								</ul>
-						</li> -->
+	    <div class="collapse navbar-collapse" >
+	    	<ul class="navbar-nav ml-auto">
+
 						<li>
-							<a rel="tooltip" title="Follow me on Google" data-placement="bottom" href="https://plus.google.com/+GurvinderSinghOnGoogle" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+							<a rel="tooltip" title="Follow me on Google" data-placement="bottom" href="https://plus.google.com/+GurvinderSinghOnGoogle" target="_blank" class="btn btn-link">
 								<i class="fa fa-google-plus"></i>
 							</a>
 						</li>
 						<li>
-                <a rel="tooltip" title="Follow me on Twitter" data-placement="bottom" href="https://twitter.com/gurvinder_777" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                <a rel="tooltip" title="Follow me on Twitter" data-placement="bottom" href="https://twitter.com/gurvinder_777" target="_blank" class="btn btn-link">
 										<i class="fa fa-twitter"></i>
 								</a>
 		        </li>
 		        <li>
-		             <a rel="tooltip" title="Follow me on Facebook" data-placement="bottom" href="https://www.facebook.com/sinny777" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+		             <a rel="tooltip" title="Follow me on Facebook" data-placement="bottom" href="https://www.facebook.com/sinny777" target="_blank" class="btn btn-link">
 									 <i class="fa fa-facebook-square"></i>
 								 </a>
 		        </li>
 					 <li>
-                <a rel="tooltip" title="Connect on LinkedIn" data-placement="bottom" href="https://www.linkedin.com/in/gurvindersingh777/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                <a rel="tooltip" title="Connect on LinkedIn" data-placement="bottom" href="https://www.linkedin.com/in/gurvindersingh777/" target="_blank" class="btn btn-link">
 									<i class="fa fa-linkedin"></i>
 								</a>
 		       </li>
@@ -200,32 +173,32 @@
 
 					</div>
 					<div class="col-md-5">
-						<div class="card card-contact">
+						<div class="card card-plain card-form-horizontal">
 							<form role="form" #contactForm="ngForm" method="post">
 								<div class="header header-raised header-primary text-center">
 									<h4 class="card-title">Contact Me</h4>
 								</div>
-								<div class="card-content">
+								<div class="card-body">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group label-floating">
-												<label class="control-label">First name</label>
-												<input type="text" class="form-control"	#firstName="ngModel" name="firstName" required [(ngModel)]="contactPayload.firstName">
+												<!-- <label class="control-label">First name</label> -->
+												<input type="text" class="form-control"	#firstName="ngModel" name="firstName" placeholder="First Name" required [(ngModel)]="contactPayload.firstName">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group label-floating">
-												<label class="control-label">Last name</label>
-												<input type="text" class="form-control"	#lastName="ngModel" name="lastName" [(ngModel)]="contactPayload.lastName">
+												<!-- <label class="control-label">Last name</label> -->
+												<input type="text" class="form-control"	#lastName="ngModel" name="lastName" placeholder="Last Name" [(ngModel)]="contactPayload.lastName">
 											</div>
 										</div>
 									</div>
 									<div class="form-group label-floating">
-										<label class="control-label">Email address</label>
-										<input type="text" class="form-control"	#firstName="ngModel" name="email" required [(ngModel)]="contactPayload.email">
+										<!-- <label class="control-label">Email address</label> -->
+										<input type="text" class="form-control"	#firstName="ngModel" name="email" placeholder="Email Address" required [(ngModel)]="contactPayload.email">
 									</div>
 									<div class="form-group label-floating">
-										<label class="control-label">Your message</label>
+										<!-- <label class="control-label">Your message</label> -->
 										<textarea class="form-control" rows="6" #message="ngModel" name="message" [(ngModel)]="contactPayload.message" placeholder="Your Message..."></textarea>
 									</div>
 
@@ -278,22 +251,22 @@
 			</nav> -->
 			<ul class="social-buttons pull-center">
 				<li>
-					<a rel="tooltip" title="Follow me on Google" data-placement="top" href="https://plus.google.com/+GurvinderSinghOnGoogle" target="_blank" class="btn btn-just-icon btn-simple btn-google-plus">
+					<a rel="tooltip" title="Follow me on Google" data-placement="top" href="https://plus.google.com/+GurvinderSinghOnGoogle" target="_blank" class="btn btn-link btn-google-plus">
 						<i class="fa fa-google-plus"></i>
 					</a>
 				</li>
 				<li>
-					<a rel="tooltip" title="Follow me on Twitter" data-placement="top" href="https://twitter.com/gurvinder_777" target="_blank" class="btn btn-just-icon btn-simple btn-twitter">
+					<a rel="tooltip" title="Follow me on Twitter" data-placement="top" href="https://twitter.com/gurvinder_777" target="_blank" class="btn btn-link btn-twitter">
 						<i class="fa fa-twitter"></i>
 					</a>
 				</li>
 				<li>
-					<a rel="tooltip" title="Like me on Facebook" data-placement="top" href="https://www.facebook.com/sinny777" target="_blank" class="btn btn-just-icon btn-simple btn-facebook">
+					<a rel="tooltip" title="Like me on Facebook" data-placement="top" href="https://www.facebook.com/sinny777" target="_blank" class="btn btn-link btn-facebook">
 						<i class="fa fa-facebook-square"></i>
 					</a>
 				</li>
 				<li>
-					<a rel="tooltip" title="Connect with me on LinkedIn" data-placement="top" href="https://www.linkedin.com/in/gurvindersingh777/" target="_blank" class="btn btn-just-icon btn-simple btn-linkedin">
+					<a rel="tooltip" title="Connect with me on LinkedIn" data-placement="top" href="https://www.linkedin.com/in/gurvindersingh777/" target="_blank" class="btn btn-link btn-linkedin">
 						<i class="fa fa-linkedin"></i>
 					</a>
 				</li>
@@ -304,20 +277,3 @@
 			</div>
 	</div>
 </footer>
-
-<script type="text/javascript">
-
-  $().ready(function(){
-    // the body of this function is in assets/material-kit/assets/material-kit.js
-
-        materialKit.initSliders();
-        window_width = $(window).width();
-
-          if (window_width >= 992){
-            big_image = $('.wrapper > .header');
-
-            $(window).on('scroll', materialKitDemo.checkScrollForParallax);
-          }
-
-  });
-</script>
