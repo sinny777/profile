@@ -16,9 +16,10 @@ import { CommonService } from './services/common.service';
 
 const appRoutes: Routes = [
   { path: '',      component: DashboardComponent },
-  { path: 'theme', component: ThemeComponent },
-  { path: 'professional', component: ProfessionalComponent },
-  { path: 'social', component: SocialComponent }
+  { path: 'pages/theme', component: ThemeComponent },
+  { path: 'world/professional', component: ProfessionalComponent },
+  { path: 'world/social', component: SocialComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({
