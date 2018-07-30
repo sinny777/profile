@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ShareButtons } from '@ngx-share/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-professional',
@@ -11,6 +12,8 @@ export class ProfessionalComponent implements OnInit {
 
   currentUser: any;
   disqusConfig: any;
+  badgesNCertificates: any;
+  myWork: any;
 
   @Input('showLogo') showLogo: boolean;
 
@@ -21,8 +24,14 @@ export class ProfessionalComponent implements OnInit {
                   };
   }
 
+  fillPageContent(){
+    this.badgesNCertificates = environment.badgesNCertificates;
+    this.myWork = environment.myWork;
+  }
+
   ngOnInit() {
     this.currentUser = this.sharedService.getCurrentUser();
+    this.fillPageContent()
   }
 
 }
