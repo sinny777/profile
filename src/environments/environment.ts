@@ -132,12 +132,12 @@ export const environment = {
     {
       "imgSrc": "/assets/images/badgesNCertificates/Cert_IBMApplicationDeveloper.png",
       "title": "IBM Certified Application Developer - Cloud Platform V1",
-      "link": "https://courses.cognitiveclass.ai/certificates/bf447b54ee474b29911681dc822f0198"
+      "link": "/assets/images/badgesNCertificates/Cert_IBMApplicationDeveloper.png"
     },
     {
       "imgSrc": "/assets/images/badgesNCertificates/Cert_IBMWatsonDeveloper.png",
       "title": "IBM Certified Application Developer - Watson V3",
-      "link": "https://courses.cognitiveclass.ai/certificates/bf447b54ee474b29911681dc822f0198"
+      "link": "/assets/images/badgesNCertificates/Cert_IBMWatsonDeveloper.png"
     }
   ]}
 };
