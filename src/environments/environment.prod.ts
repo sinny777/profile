@@ -19,6 +19,12 @@ export const environment = {
           "link": "https://github.com/sinny777/cognitive"
       },
       {
+          "imgSrc": "/assets/images/nlp.png",
+          "title": "My Natural Language Classifier",
+          "description": "This one has code for creating Natural Language classifier model that runs on IBM Watson Machine learning platform and can be configured to use runtime (CPU or GPU).",
+          "link": "https://github.com/sinny777/natural_language_classifier"
+      },
+      {
           "imgSrc": "/assets/images/machinelearning1.jpeg",
           "title": "Machine Learning",
           "description": "This repository includes a direction for getting started with Machine Learning and Deep learning concepts using Scikit Learn, Tensorflow and Keras",
