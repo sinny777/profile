@@ -24,6 +24,18 @@ export class ProfessionalComponent implements OnInit {
                   };
   }
 
+  ngAfterViewInit() {
+    this.scrollToTop('professional_header')
+  }
+
+  scrollToTop(elementId){
+    let top = document.getElementById(elementId);
+    if (top !== null) {
+      top.scrollIntoView();
+      top = null;
+    }
+  }
+
   fillPageContent(){
     this.badgesNCertificates = environment.badgesNCertificates;
     this.myWork = environment.myWork;

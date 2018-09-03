@@ -91,6 +91,11 @@ export const environment = {
     ],
   "certificates": [
     {
+      "imgSrc": "/assets/images/badgesNCertificates/Cert_GCP_ML.png",
+      "title": "End-to-End Machine Learning with Tensorflow on GCP",
+      "link": "https://www.coursera.org/account/accomplishments/verify/TXLPCZHWLXMC"
+    },
+    {
       "imgSrc": "/assets/images/badgesNCertificates/Cert_DeepLearingFundamentals.png",
       "title": "Deep Learning Fundamentals",
       "link": "https://courses.cognitiveclass.ai/certificates/a2d596b1f4944a1d97aaa4cc3ef926d3"
