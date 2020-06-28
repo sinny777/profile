@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
-import { CommonService } from '../../services/common.service';
-import { ShareButtons } from '@ngx-share/core';
+// import { CommonService } from '../../services/common.service';
+// import { ShareButtons } from '@ngx-share/core';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +13,10 @@ export class DashboardComponent implements OnInit {
   currentUser: any;
   disqusConfig: any;
 
-  constructor(public sharedService: SharedService, public share: ShareButtons) {
+  constructor(public sharedService: SharedService) {
     this.disqusConfig = {
-                    "pageIdentifier": "Dashboard",
-                    "pageUrl": "http://www.gurvinder.info"
+                    'pageIdentifier': 'Dashboard',
+                    'pageUrl': 'http://www.gurvinder.info'
                   };
   }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
+// import { NgModule } from '@angular/core';
 
 import { SharedService } from '../../services/shared.service';
-import {Paho} from 'ng2-mqtt/mqttws31';
+// import {Paho} from 'ng2-mqtt/mqttws31';
 
 @Component({
   selector: 'app-theme',
