@@ -34,7 +34,7 @@
               "src/assets/assets-for-app/vertical-nav.css"
             ],
             "scripts": [
-
+              "./node_modules/postcss-loader/dist/cjs.js"
             ]
           },
           "configurations": {
