@@ -29,7 +29,9 @@
               "src/.htaccess"
             ],
             "styles": [
-
+              "src/assets/assets-for-app/demo.css",
+              "src/assets/css/app.css",
+              "src/assets/assets-for-app/vertical-nav.css"
             ],
             "scripts": [
 
