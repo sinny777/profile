@@ -4,10 +4,10 @@
 ## This will build front end container running nginx
 ## Author: Gurvinder Singh (sinny777@gmail.com)
 ##
-## docker buildx build --platform linux/amd64,linux/arm64 --build-arg CLIENT_BUILD_ENV=dev -t sinny777/profile:dev --push .
+## docker buildx build --platform linux/amd64,linux/arm64 --build-arg CLIENT_BUILD_ENV=production -t sinny777/profile:latest --push .
 ## docker build --build-arg CLIENT_BUILD_ENV=production -t sinny777/profile:v1.0.1 .
 ## docker run -it -d -p 4200:80 --network my-network --name profile profile:latest
-## docker run -it -p 80:80 --name profile sinny777/profile:v1.0.1
+## docker run -it -p 8080:8080 --name profile sinny777/profile:latest
 ##
 
 FROM node:16-alpine as client-build
@@ -21,7 +21,6 @@ RUN mkdir -p /app
 WORKDIR /app
 
 ARG CLIENT_BUILD_ENV=production
-ENV PORT 80
 
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # --virtual: bundle packages, remove whole bundle at once, when done
@@ -50,6 +49,8 @@ RUN chgrp -R 0 /var/cache/nginx /var/run /var/log/nginx && \
     chmod -R g=u /var/cache/nginx /var/run /var/log/nginx
 
 # USER 1001
+
+ENV PORT 80
 
 EXPOSE $PORT
 

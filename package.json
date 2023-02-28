@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "main": "dist/index.html",
-    "dist": "ng build --prod --configuration=production && cp src/static/manifest.yml src/static/Staticfile dist/profile"
+    "dist": "ng build --configuration=production && cp src/static/manifest.yml src/static/Staticfile dist/profile"
   },
   "private": true,
   "dependencies": {
