@@ -28,7 +28,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## IBM Cloud Code Engine Deployment
 
+### Enable SSL / HTTPS
 
+```
+
+sudo certbot certonly --manual --preferred-challenges dns --email sinny777@gmail.com --server https://acme-v02.api.letsencrypt.org/directory --agree-tos --domain gurvinder.info --domain www.gurvinder.info
+
+
+```
 
 ```
 
